@@ -1,28 +1,32 @@
-﻿from pathlib import Path
-import logging
+﻿import logging
 import time
 
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
-from backend.src.train_models import load_model, predict
+from backend.src.model_registry import (
+    MODEL_NAMES,
+    MODEL_DIR,
+    load_model,
+    get_feature_columns,
+    predict_model,
+)
 
 app = FastAPI(
     title="PathSnap Backend API",
-    description="Decision Tree and Random Forest inference service",
-    version="1.0.0",
+    description="Four-model GPS candidate classification service",
+    version="1.1.0",
 )
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("pathsnap")
 
-MODEL_DIR = Path(__file__).resolve().parents[1] / "models"
 
 class PredictionRequest(BaseModel):
     model_name: str = Field(
         default="random_forest",
-        pattern="^(decision_tree|random_forest)$"
+        pattern="^(logistic_regression|knn|decision_tree|random_forest)$",
     )
     features: list[dict[str, float]]
 
@@ -49,7 +53,7 @@ def get_models():
                 "name": name,
                 "available": (MODEL_DIR / f"{name}.joblib").exists(),
             }
-            for name in ["decision_tree", "random_forest"]
+            for name in MODEL_NAMES
         ]
     }
 
@@ -57,29 +61,29 @@ def get_models():
 @app.post("/predict")
 def make_prediction(request: PredictionRequest):
     if not request.features:
-        raise HTTPException(
-            status_code=400,
-            detail="At least one feature row is required",
-        )
+        raise HTTPException(status_code=400, detail="No feature rows supplied")
 
     try:
         artifact = load_model(request.model_name)
-        columns = artifact["feature_columns"]
-
+        columns = get_feature_columns(request.model_name, artifact)
         frame = pd.DataFrame(request.features)
 
-        if set(frame.columns) != set(columns):
+        missing = set(columns) - set(frame.columns)
+        extra = set(columns) - set(frame.columns)
+
+        if missing or extra:
             raise HTTPException(
                 status_code=422,
                 detail={
                     "message": "Feature columns do not match trained model",
                     "expected": columns,
-                    "received": list(frame.columns),
+                    "missing": sorted(missing),
+                    "unexpected": sorted(extra),
                 },
             )
 
         start = time.perf_counter()
-        predictions = predict(request.model_name, frame)
+        result = predict_model(request.model_name, frame)
         elapsed = time.perf_counter() - start
 
         logger.info(
@@ -91,17 +95,16 @@ def make_prediction(request: PredictionRequest):
 
         return {
             "model": request.model_name,
-            "predictions": predictions.tolist(),
-            "count": len(predictions),
+            "predictions": result["predictions"],
+            "probabilities": result["probabilities"],
+            "count": len(result["predictions"]),
             "inference_time_seconds": elapsed,
         }
 
     except FileNotFoundError as exc:
         raise HTTPException(status_code=503, detail=str(exc))
-
     except HTTPException:
         raise
-
     except Exception as exc:
         logger.exception("Prediction failed")
         raise HTTPException(status_code=500, detail=str(exc))
