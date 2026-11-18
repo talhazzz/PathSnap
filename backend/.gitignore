@@ -5,8 +5,15 @@ __pycache__/
 .pytest_cache/
 .coverage
 .env
-data/raw/
+data/raw/*
+!data/raw/Student folder/
+data/raw/Student folder/*
+!data/raw/Student folder/student_test/
 data/processed/
 models/*.joblib
+!models/decision_tree.joblib
+!models/knn.joblib
+!models/linear_regression.joblib
+!models/hist_gradient_boosting_tuned.joblib
 models/*.pkl
 logs/
