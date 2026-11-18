@@ -13,10 +13,8 @@ RUN pip install --upgrade pip && \
     pip install --no-cache-dir scikit-learn==1.9.1 && \
     pip install --no-cache-dir -r /app/backend/requirements.txt
 
-# Copy backend code, Medha's shared ml/ modules, and trained artifacts
-COPY backend /app/backend
-COPY artifacts /app/artifacts
-COPY ml /app/ml
+# Copy backend + optional shared ml/ and artifacts/ directories (excluded dirs filtered by .dockerignore)
+COPY . /app
 
 EXPOSE 8000
 

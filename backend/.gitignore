@@ -17,3 +17,5 @@ models/*.joblib
 !models/hist_gradient_boosting_tuned.joblib
 models/*.pkl
 logs/
+*.bak
+*.backup

@@ -1,15 +1,20 @@
 ﻿from pathlib import Path
-import pandas as pd
 
-root = Path("backend/data/raw/Student folder")
-trip = sorted((root / "train").iterdir())[0]
+BACKEND_DIR = Path(__file__).resolve().parent
+root = BACKEND_DIR / "data" / "raw" / "Student folder"
 
-for ext in ["track", "nodes", "arcs", "route"]:
-    file = trip / f"{trip.name}.{ext}"
-    df = pd.read_csv(file, sep=r"\s+", header=None)
+for partition in ["train", "student_test"]:
+    folder = root / partition
+    if not folder.is_dir():
+        print(f"\n{partition.upper()}: NOT PRESENT ({folder})")
+        continue
+    trips = sorted(p for p in folder.iterdir() if p.is_dir())
 
-    print("\n" + "=" * 45)
-    print(f"FILE: {trip.name}.{ext}")
-    print("SHAPE:", df.shape)
-    print("SAMPLE:")
-    print(df.head(5).to_string(index=False, header=False))
+    print(f"\n{partition.upper()}")
+    print("Trip count:", len(trips))
+
+    for trip in trips[:3]:
+        print("Trip:", trip.name)
+        for ext in ["track", "nodes", "arcs", "route"]:
+            f = trip / f"{trip.name}.{ext}"
+            print(f"  {ext}: {'FOUND' if f.exists() else 'MISSING'}")

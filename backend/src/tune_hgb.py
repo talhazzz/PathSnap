@@ -25,8 +25,8 @@ import pandas as pd
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import f1_score
 
-from src.train_extra_models import HGB_PARAMS, _balanced_weights
-from src.train_models import (
+from .train_extra_models import HGB_PARAMS, _balanced_weights
+from .train_models import (
     MODEL_DIR,
     RESULT_DIR,
     evaluate_on_student_test,
@@ -35,7 +35,7 @@ from src.train_models import (
     load_shared_dataset,
     resolve_shared_dataset_path,
 )
-from src.trip_pipeline import FEATURE_COLUMNS
+from .trip_pipeline import FEATURE_COLUMNS
 
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 
