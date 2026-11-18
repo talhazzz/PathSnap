@@ -31,7 +31,7 @@ from sklearn.metrics import (
 from sklearn.model_selection import GroupKFold
 from sklearn.tree import DecisionTreeClassifier
 
-from src.trip_pipeline import (
+from .trip_pipeline import (
     DEFAULT_DATA_ROOT,
     FEATURE_COLUMNS,
     align_feature_frame,

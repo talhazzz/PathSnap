@@ -3,7 +3,12 @@ import sys
 import numpy as np
 import pandas as pd
 
+BACKEND_DIR = Path(__file__).resolve().parent
+if str(BACKEND_DIR) not in sys.path:
+    sys.path.insert(0, str(BACKEND_DIR))
+
 from src.data_loader import load_partition
+
 
 def audit_trip(trip):
     track = trip["track"]
@@ -46,8 +51,14 @@ def audit_trip(trip):
 
 
 if __name__ == "__main__":
+    output = BACKEND_DIR / "experiments"
+    output.mkdir(parents=True, exist_ok=True)
     for partition in ["train", "student_test"]:
-        trips = load_partition(partition)
+        try:
+            trips = load_partition(partition)
+        except FileNotFoundError:
+            print(f"\nSkipping missing partition: {partition}")
+            continue
         results = pd.DataFrame([audit_trip(t) for t in trips])
 
         print("\n" + "=" * 65)
@@ -58,8 +69,6 @@ if __name__ == "__main__":
         print("\nSUMMARY")
         print(results.describe(include="all").to_string())
 
-        output = Path("backend/experiments")
-        output.mkdir(parents=True, exist_ok=True)
         results.to_csv(output / f"{partition}_data_audit.csv", index=False)
 
-    print("\nAUDIT COMPLETE. Reports saved in backend/experiments/")
+    print(f"\nAUDIT COMPLETE. Reports saved in {output}")
