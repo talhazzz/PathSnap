@@ -1,6 +1,5 @@
-﻿fastapi
+fastapi
 uvicorn[standard]
-pydantic
 numpy
 pandas
 scipy

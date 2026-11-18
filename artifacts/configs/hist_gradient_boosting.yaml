@@ -1,0 +1,19 @@
+model:
+  max_iter: 150
+  learning_rate: 0.1
+  max_leaf_nodes: 31
+  min_samples_leaf: 30
+  l2_regularization: 1.0
+  random_state: 42
+
+training:
+  balance_classes: true
+
+feature_importance:
+  validation_sample_size: 20000
+  repeats: 3
+
+paths:
+  dataset: artifacts/shared/candidate_features.csv
+  model: artifacts/models/hist_gradient_boosting.joblib
+  metrics: artifacts/reports/hist_gradient_boosting_metrics.json
