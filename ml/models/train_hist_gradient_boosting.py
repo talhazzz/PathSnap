@@ -20,6 +20,7 @@ from sklearn.metrics import (
     recall_score,
     roc_auc_score,
 )
+from sklearn.inspection import permutation_importance
 
 from ml.preprocessing.build_shared_dataset import FEATURE_COLUMNS
 
@@ -106,6 +107,23 @@ def train(config_path: Path) -> None:
         "_score",
     )
     nearest["is_correct"] = nearest["label"].astype(bool)
+    importance_settings = settings.get("feature_importance", {})
+    importance_sample = validation_frame.sample(
+        n=min(
+            int(importance_settings.get("validation_sample_size", 20000)),
+            len(validation_frame),
+        ),
+        random_state=int(model_options.get("random_state", 42)),
+    )
+    importance = permutation_importance(
+        model,
+        importance_sample[FEATURE_COLUMNS].to_numpy(dtype=np.float32),
+        importance_sample["label"].to_numpy(dtype=np.int8),
+        scoring="average_precision",
+        n_repeats=int(importance_settings.get("repeats", 3)),
+        random_state=int(model_options.get("random_state", 42)),
+        n_jobs=1,
+    )
     metrics = {
         "model": "HistGradientBoostingClassifier",
         "feature_columns": FEATURE_COLUMNS,
@@ -134,6 +152,24 @@ def train(config_path: Path) -> None:
             },
             "classifier_only_candidate_ranking": ranking_metrics(ranked),
             "nearest_road_baseline": ranking_metrics(nearest),
+        },
+        "feature_importance": {
+            "method": "permutation importance on held-out validation rows",
+            "scoring": "average_precision",
+            "sample_rows": int(len(importance_sample)),
+            "repeats": int(importance_settings.get("repeats", 3)),
+            "values": [
+                {
+                    "feature": feature,
+                    "mean": float(mean),
+                    "std": float(std),
+                }
+                for feature, mean, std in sorted(
+                    zip(FEATURE_COLUMNS, importance.importances_mean, importance.importances_std),
+                    key=lambda item: item[1],
+                    reverse=True,
+                )
+            ],
         },
     }
     model_path.parent.mkdir(parents=True, exist_ok=True)

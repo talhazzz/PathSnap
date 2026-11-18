@@ -15,3 +15,5 @@ Outputs:
 - `artifacts/feature_schema.md`: source conventions, feature definitions, target method, and model-input exclusions.
 
 Talha and Mithun should load `candidate_features.csv`, set `y = frame["label"]`, and set `X = frame[FEATURE_COLUMNS]` from `ml.preprocessing.build_shared_dataset`. Train with `split == "train"`; evaluate using only `split == "validation"`. Group/report by `trip_id` as needed, and keep `trip_id`, `point_idx`, and `candidate_arc_id` for joining predictions back to trajectories. Do not include any identifier, `split`, or `label` column in `X`. The CSV contains only source `train/` trips; `student_test/` was not read.
+
+Two training trips have low route-to-track agreement in the current alignment diagnostics (00000033 and 00000054). Their rows are retained only when the aligned route arc is within 45 m, but teammates should inspect the summary before interpreting metrics and consider a sensitivity run without these trips.

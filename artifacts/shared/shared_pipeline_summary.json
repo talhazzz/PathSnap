@@ -1,0 +1,1810 @@
+{
+  "source_partition": "train",
+  "source_path": "data/raw/Student folder/train",
+  "student_test_read": false,
+  "trip_count": 80,
+  "train_trip_count": 64,
+  "validation_trip_count": 16,
+  "raw_total_track_points": 208417,
+  "candidate_feature_rows": 1649424,
+  "positive_candidate_rows": 184648,
+  "negative_candidate_rows": 1464776,
+  "candidate_rows_by_split": {
+    "train": 1317582,
+    "validation": 331842
+  },
+  "positive_rows_by_split": {
+    "train": 146055,
+    "validation": 38593
+  },
+  "config": {
+    "data": {
+      "root": "data/raw/Student folder",
+      "training_partition": "train"
+    },
+    "output": {
+      "directory": "artifacts/shared",
+      "candidate_features": "candidate_features.csv",
+      "sample": "candidate_features_sample.csv",
+      "split": "trip_split.csv",
+      "summary": "shared_pipeline_summary.json"
+    },
+    "candidate_generation": {
+      "search_radius_m": 60.0,
+      "max_candidates_per_point": 16,
+      "label_max_distance_m": 45.0
+    },
+    "labeling": {
+      "route_advance_penalty": 0.15
+    },
+    "validation": {
+      "fraction": 0.2,
+      "random_seed": 42
+    },
+    "sample": {
+      "max_rows": 5000
+    }
+  },
+  "trips": [
+    {
+      "trip_id": "00000001",
+      "split": "validation",
+      "track_points": 1315,
+      "nodes": 88809,
+      "directed_arcs": 165790,
+      "route_arcs": 525,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1315,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 14860,
+      "positive_rows": 1315,
+      "reference_distance_m_p50_p90_p99": [
+        4.292697805497736,
+        10.216891093839068,
+        15.673692388074805
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        13.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000002",
+      "split": "train",
+      "track_points": 7243,
+      "nodes": 7936,
+      "directed_arcs": 16139,
+      "route_arcs": 262,
+      "route_directed_continuity_fraction": 0.9961685823754789,
+      "reference_matched_points": 6361,
+      "unmatched_or_low_confidence_points": 882,
+      "candidate_rows": 70244,
+      "positive_rows": 6361,
+      "reference_distance_m_p50_p90_p99": [
+        5.7524496781235674,
+        97.33236518416302,
+        479.1605227520822
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        12.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000003",
+      "split": "train",
+      "track_points": 821,
+      "nodes": 9138,
+      "directed_arcs": 18028,
+      "route_arcs": 79,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 821,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 12223,
+      "positive_rows": 821,
+      "reference_distance_m_p50_p90_p99": [
+        4.440437810509422,
+        11.750342356318164,
+        18.37909125339277
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000004",
+      "split": "train",
+      "track_points": 1064,
+      "nodes": 7350,
+      "directed_arcs": 15499,
+      "route_arcs": 320,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1064,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 8357,
+      "positive_rows": 1064,
+      "reference_distance_m_p50_p90_p99": [
+        8.514657050842864,
+        25.669049414469384,
+        36.061688956075265
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000005",
+      "split": "validation",
+      "track_points": 1045,
+      "nodes": 898,
+      "directed_arcs": 1579,
+      "route_arcs": 105,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1045,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 3417,
+      "positive_rows": 1045,
+      "reference_distance_m_p50_p90_p99": [
+        4.517873170622961,
+        10.989835533589778,
+        20.721190168471736
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        2.0,
+        5.0
+      ]
+    },
+    {
+      "trip_id": "00000006",
+      "split": "train",
+      "track_points": 1450,
+      "nodes": 3259,
+      "directed_arcs": 6757,
+      "route_arcs": 261,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1450,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 14691,
+      "positive_rows": 1450,
+      "reference_distance_m_p50_p90_p99": [
+        4.54575621316757,
+        11.636549044463885,
+        17.784164336748955
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000008",
+      "split": "train",
+      "track_points": 3093,
+      "nodes": 4995,
+      "directed_arcs": 10421,
+      "route_arcs": 173,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 3066,
+      "unmatched_or_low_confidence_points": 27,
+      "candidate_rows": 41156,
+      "positive_rows": 3066,
+      "reference_distance_m_p50_p90_p99": [
+        7.774800752878799,
+        21.765171004211258,
+        42.8082760185277
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000010",
+      "split": "train",
+      "track_points": 2711,
+      "nodes": 8502,
+      "directed_arcs": 15715,
+      "route_arcs": 210,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2711,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 38657,
+      "positive_rows": 2711,
+      "reference_distance_m_p50_p90_p99": [
+        5.162430639830091,
+        13.20856150626717,
+        25.90458875575019
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000011",
+      "split": "train",
+      "track_points": 2828,
+      "nodes": 2649,
+      "directed_arcs": 5393,
+      "route_arcs": 565,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2828,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 18209,
+      "positive_rows": 2828,
+      "reference_distance_m_p50_p90_p99": [
+        5.087941894448871,
+        12.301040984549331,
+        19.852742985897617
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        4.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000012",
+      "split": "train",
+      "track_points": 1608,
+      "nodes": 16376,
+      "directed_arcs": 38599,
+      "route_arcs": 205,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1608,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 7187,
+      "positive_rows": 1608,
+      "reference_distance_m_p50_p90_p99": [
+        5.096865670957929,
+        12.779871959286746,
+        22.177280277782778
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        4.0,
+        9.299999999999955
+      ]
+    },
+    {
+      "trip_id": "00000013",
+      "split": "validation",
+      "track_points": 2580,
+      "nodes": 155003,
+      "directed_arcs": 307392,
+      "route_arcs": 788,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2580,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 23974,
+      "positive_rows": 2580,
+      "reference_distance_m_p50_p90_p99": [
+        4.000974073978096,
+        9.948803597561747,
+        16.265202004585834
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000014",
+      "split": "train",
+      "track_points": 448,
+      "nodes": 4067,
+      "directed_arcs": 8288,
+      "route_arcs": 164,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 448,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 6095,
+      "positive_rows": 448,
+      "reference_distance_m_p50_p90_p99": [
+        4.7179182068398555,
+        11.57002393133536,
+        31.35850817232081
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000016",
+      "split": "validation",
+      "track_points": 1305,
+      "nodes": 8205,
+      "directed_arcs": 15098,
+      "route_arcs": 204,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1305,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 18210,
+      "positive_rows": 1305,
+      "reference_distance_m_p50_p90_p99": [
+        6.746985223973425,
+        22.624640363145136,
+        36.76567401011223
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000018",
+      "split": "train",
+      "track_points": 379,
+      "nodes": 5980,
+      "directed_arcs": 11545,
+      "route_arcs": 166,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 379,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 4971,
+      "positive_rows": 379,
+      "reference_distance_m_p50_p90_p99": [
+        4.337555870432873,
+        9.39762131326594,
+        15.811060571585243
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000019",
+      "split": "train",
+      "track_points": 2354,
+      "nodes": 52694,
+      "directed_arcs": 108517,
+      "route_arcs": 545,
+      "route_directed_continuity_fraction": 0.9944852941176471,
+      "reference_matched_points": 2315,
+      "unmatched_or_low_confidence_points": 39,
+      "candidate_rows": 22983,
+      "positive_rows": 2315,
+      "reference_distance_m_p50_p90_p99": [
+        5.509169994248813,
+        12.789836746258207,
+        90.78401859934368
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000020",
+      "split": "train",
+      "track_points": 2353,
+      "nodes": 2739,
+      "directed_arcs": 5958,
+      "route_arcs": 142,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2312,
+      "unmatched_or_low_confidence_points": 41,
+      "candidate_rows": 9919,
+      "positive_rows": 2312,
+      "reference_distance_m_p50_p90_p99": [
+        5.428369044980618,
+        15.848237216429169,
+        77.33925943167021
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        2.0,
+        10.0
+      ]
+    },
+    {
+      "trip_id": "00000021",
+      "split": "train",
+      "track_points": 15783,
+      "nodes": 732,
+      "directed_arcs": 1510,
+      "route_arcs": 277,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 15739,
+      "unmatched_or_low_confidence_points": 44,
+      "candidate_rows": 54479,
+      "positive_rows": 15739,
+      "reference_distance_m_p50_p90_p99": [
+        4.425524928866028,
+        11.841959458917179,
+        36.019663426305854
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        2.0,
+        6.0
+      ]
+    },
+    {
+      "trip_id": "00000022",
+      "split": "train",
+      "track_points": 474,
+      "nodes": 9607,
+      "directed_arcs": 18982,
+      "route_arcs": 376,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 474,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 6427,
+      "positive_rows": 474,
+      "reference_distance_m_p50_p90_p99": [
+        4.14158708507861,
+        11.567987629433178,
+        18.375176883546846
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000024",
+      "split": "validation",
+      "track_points": 801,
+      "nodes": 25782,
+      "directed_arcs": 51609,
+      "route_arcs": 249,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 801,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 6888,
+      "positive_rows": 801,
+      "reference_distance_m_p50_p90_p99": [
+        4.137888732559721,
+        10.033001936015191,
+        18.28343901542204
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        7.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000025",
+      "split": "train",
+      "track_points": 1179,
+      "nodes": 38035,
+      "directed_arcs": 85639,
+      "route_arcs": 283,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1179,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 12594,
+      "positive_rows": 1179,
+      "reference_distance_m_p50_p90_p99": [
+        5.108920338566348,
+        11.615813303327148,
+        18.21568160242354
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        11.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000026",
+      "split": "train",
+      "track_points": 361,
+      "nodes": 2580,
+      "directed_arcs": 5043,
+      "route_arcs": 197,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 361,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 4248,
+      "positive_rows": 361,
+      "reference_distance_m_p50_p90_p99": [
+        4.356636866855005,
+        11.55683064220512,
+        18.400847605785568
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        12.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000027",
+      "split": "train",
+      "track_points": 694,
+      "nodes": 2756,
+      "directed_arcs": 5588,
+      "route_arcs": 138,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 694,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 6228,
+      "positive_rows": 694,
+      "reference_distance_m_p50_p90_p99": [
+        4.263864544833602,
+        11.496229492496882,
+        20.115165863672257
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000028",
+      "split": "validation",
+      "track_points": 3565,
+      "nodes": 60628,
+      "directed_arcs": 127216,
+      "route_arcs": 618,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 3540,
+      "unmatched_or_low_confidence_points": 25,
+      "candidate_rows": 27102,
+      "positive_rows": 3540,
+      "reference_distance_m_p50_p90_p99": [
+        6.093101373999734,
+        15.10957945675451,
+        33.519768618635815
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000029",
+      "split": "train",
+      "track_points": 733,
+      "nodes": 10825,
+      "directed_arcs": 20868,
+      "route_arcs": 204,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 733,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 9716,
+      "positive_rows": 733,
+      "reference_distance_m_p50_p90_p99": [
+        4.434615280222106,
+        10.958536259487207,
+        18.802993082560203
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000031",
+      "split": "train",
+      "track_points": 4245,
+      "nodes": 59059,
+      "directed_arcs": 125831,
+      "route_arcs": 432,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 4245,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 39762,
+      "positive_rows": 4245,
+      "reference_distance_m_p50_p90_p99": [
+        4.289322786171538,
+        10.813971297099965,
+        17.60270651051859
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        9.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000032",
+      "split": "train",
+      "track_points": 2464,
+      "nodes": 124540,
+      "directed_arcs": 259437,
+      "route_arcs": 819,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2464,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 19952,
+      "positive_rows": 2464,
+      "reference_distance_m_p50_p90_p99": [
+        5.5996009208723425,
+        12.739429907300863,
+        19.976253123433974
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000033",
+      "split": "train",
+      "track_points": 5844,
+      "nodes": 3340,
+      "directed_arcs": 6360,
+      "route_arcs": 169,
+      "route_directed_continuity_fraction": 0.9940476190476191,
+      "reference_matched_points": 2112,
+      "unmatched_or_low_confidence_points": 3732,
+      "candidate_rows": 23990,
+      "positive_rows": 2112,
+      "reference_distance_m_p50_p90_p99": [
+        121.69982229541392,
+        138.86772627851468,
+        145.7415236677136
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000034",
+      "split": "train",
+      "track_points": 3614,
+      "nodes": 19597,
+      "directed_arcs": 40971,
+      "route_arcs": 454,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 3613,
+      "unmatched_or_low_confidence_points": 1,
+      "candidate_rows": 31997,
+      "positive_rows": 3613,
+      "reference_distance_m_p50_p90_p99": [
+        5.690693996465533,
+        15.877608998917596,
+        26.589587261319565
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000035",
+      "split": "validation",
+      "track_points": 1643,
+      "nodes": 21126,
+      "directed_arcs": 35212,
+      "route_arcs": 403,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1643,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 22037,
+      "positive_rows": 1643,
+      "reference_distance_m_p50_p90_p99": [
+        4.430468511457314,
+        10.481115995960627,
+        15.595189832553013
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000036",
+      "split": "train",
+      "track_points": 1368,
+      "nodes": 4528,
+      "directed_arcs": 9619,
+      "route_arcs": 156,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1368,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 14891,
+      "positive_rows": 1368,
+      "reference_distance_m_p50_p90_p99": [
+        4.610209651767617,
+        11.147688644503614,
+        17.461319924946828
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        14.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000037",
+      "split": "validation",
+      "track_points": 677,
+      "nodes": 9472,
+      "directed_arcs": 21744,
+      "route_arcs": 163,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 677,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 8977,
+      "positive_rows": 677,
+      "reference_distance_m_p50_p90_p99": [
+        3.444030375945033,
+        8.676132285416749,
+        12.444099111293765
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000038",
+      "split": "validation",
+      "track_points": 1287,
+      "nodes": 21046,
+      "directed_arcs": 42026,
+      "route_arcs": 221,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1287,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 16966,
+      "positive_rows": 1287,
+      "reference_distance_m_p50_p90_p99": [
+        4.863577929294678,
+        11.971496795686006,
+        22.112207710710944
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000039",
+      "split": "train",
+      "track_points": 363,
+      "nodes": 1185,
+      "directed_arcs": 2388,
+      "route_arcs": 161,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 363,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 2855,
+      "positive_rows": 363,
+      "reference_distance_m_p50_p90_p99": [
+        4.219136966780323,
+        9.692819601483613,
+        16.180179595210458
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000041",
+      "split": "validation",
+      "track_points": 1019,
+      "nodes": 7837,
+      "directed_arcs": 14317,
+      "route_arcs": 340,
+      "route_directed_continuity_fraction": 0.9970501474926253,
+      "reference_matched_points": 1019,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 11013,
+      "positive_rows": 1019,
+      "reference_distance_m_p50_p90_p99": [
+        3.7916571024998666,
+        9.692654513264285,
+        20.345284880737886
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        11.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000042",
+      "split": "train",
+      "track_points": 7739,
+      "nodes": 49376,
+      "directed_arcs": 101128,
+      "route_arcs": 1440,
+      "route_directed_continuity_fraction": 0.9993050729673384,
+      "reference_matched_points": 7739,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 75219,
+      "positive_rows": 7739,
+      "reference_distance_m_p50_p90_p99": [
+        3.754176790814187,
+        9.441792107637083,
+        14.765851574766163
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000043",
+      "split": "validation",
+      "track_points": 2322,
+      "nodes": 109070,
+      "directed_arcs": 215620,
+      "route_arcs": 427,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2135,
+      "unmatched_or_low_confidence_points": 187,
+      "candidate_rows": 19646,
+      "positive_rows": 2135,
+      "reference_distance_m_p50_p90_p99": [
+        10.998686211701203,
+        36.31823569835228,
+        161.2697144465447
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000044",
+      "split": "train",
+      "track_points": 546,
+      "nodes": 4386,
+      "directed_arcs": 9209,
+      "route_arcs": 130,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 546,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 6037,
+      "positive_rows": 546,
+      "reference_distance_m_p50_p90_p99": [
+        4.747086013089757,
+        11.750515022186676,
+        18.274002988207126
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        11.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000045",
+      "split": "train",
+      "track_points": 640,
+      "nodes": 2034,
+      "directed_arcs": 4335,
+      "route_arcs": 59,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 640,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 4386,
+      "positive_rows": 640,
+      "reference_distance_m_p50_p90_p99": [
+        4.490671990058981,
+        12.804158574658286,
+        26.294257167902284
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000046",
+      "split": "train",
+      "track_points": 1401,
+      "nodes": 299,
+      "directed_arcs": 649,
+      "route_arcs": 66,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1400,
+      "unmatched_or_low_confidence_points": 1,
+      "candidate_rows": 9356,
+      "positive_rows": 1400,
+      "reference_distance_m_p50_p90_p99": [
+        5.882277734030467,
+        15.57250704852899,
+        33.01720628335601
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        14.0
+      ]
+    },
+    {
+      "trip_id": "00000047",
+      "split": "train",
+      "track_points": 1272,
+      "nodes": 18388,
+      "directed_arcs": 39747,
+      "route_arcs": 188,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1272,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 16132,
+      "positive_rows": 1272,
+      "reference_distance_m_p50_p90_p99": [
+        4.324340927615747,
+        10.689433566705763,
+        18.584278302855548
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000048",
+      "split": "train",
+      "track_points": 1240,
+      "nodes": 1308,
+      "directed_arcs": 2592,
+      "route_arcs": 149,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1240,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 10268,
+      "positive_rows": 1240,
+      "reference_distance_m_p50_p90_p99": [
+        7.066658834886436,
+        16.124074575011587,
+        25.97648434951202
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000050",
+      "split": "train",
+      "track_points": 518,
+      "nodes": 2206,
+      "directed_arcs": 4576,
+      "route_arcs": 94,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 518,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 4976,
+      "positive_rows": 518,
+      "reference_distance_m_p50_p90_p99": [
+        5.216721176141719,
+        12.474881554029961,
+        18.107592350150767
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        9.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000051",
+      "split": "train",
+      "track_points": 984,
+      "nodes": 4181,
+      "directed_arcs": 8494,
+      "route_arcs": 299,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 984,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 10827,
+      "positive_rows": 984,
+      "reference_distance_m_p50_p90_p99": [
+        5.300853933664042,
+        12.698909637760414,
+        18.84677446365957
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000053",
+      "split": "train",
+      "track_points": 1304,
+      "nodes": 77905,
+      "directed_arcs": 148707,
+      "route_arcs": 754,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1304,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 16798,
+      "positive_rows": 1304,
+      "reference_distance_m_p50_p90_p99": [
+        4.203940632254559,
+        10.780782805618136,
+        18.64253810242476
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000054",
+      "split": "train",
+      "track_points": 19313,
+      "nodes": 63822,
+      "directed_arcs": 116916,
+      "route_arcs": 422,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1982,
+      "unmatched_or_low_confidence_points": 17331,
+      "candidate_rows": 23631,
+      "positive_rows": 1982,
+      "reference_distance_m_p50_p90_p99": [
+        139.25938704073295,
+        196.31470915879154,
+        216.9194878371287
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        15.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000055",
+      "split": "validation",
+      "track_points": 2472,
+      "nodes": 98511,
+      "directed_arcs": 198961,
+      "route_arcs": 475,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2471,
+      "unmatched_or_low_confidence_points": 1,
+      "candidate_rows": 16311,
+      "positive_rows": 2471,
+      "reference_distance_m_p50_p90_p99": [
+        3.8541748228521078,
+        9.517079601353549,
+        15.05467238286289
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        5.0,
+        14.0
+      ]
+    },
+    {
+      "trip_id": "00000057",
+      "split": "train",
+      "track_points": 1645,
+      "nodes": 8929,
+      "directed_arcs": 18777,
+      "route_arcs": 300,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1632,
+      "unmatched_or_low_confidence_points": 13,
+      "candidate_rows": 18919,
+      "positive_rows": 1632,
+      "reference_distance_m_p50_p90_p99": [
+        6.113261261675145,
+        14.606999511708498,
+        29.96470074671599
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        13.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000058",
+      "split": "train",
+      "track_points": 599,
+      "nodes": 22367,
+      "directed_arcs": 39383,
+      "route_arcs": 345,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 599,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 8759,
+      "positive_rows": 599,
+      "reference_distance_m_p50_p90_p99": [
+        4.399095998856036,
+        10.330958348532267,
+        17.025206145153515
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000060",
+      "split": "train",
+      "track_points": 854,
+      "nodes": 15128,
+      "directed_arcs": 30077,
+      "route_arcs": 520,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 854,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 12369,
+      "positive_rows": 854,
+      "reference_distance_m_p50_p90_p99": [
+        5.194905749281174,
+        14.775643378270994,
+        23.481670152960398
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000061",
+      "split": "validation",
+      "track_points": 1430,
+      "nodes": 4947,
+      "directed_arcs": 10339,
+      "route_arcs": 296,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1410,
+      "unmatched_or_low_confidence_points": 20,
+      "candidate_rows": 19990,
+      "positive_rows": 1410,
+      "reference_distance_m_p50_p90_p99": [
+        5.759335428810607,
+        15.64464459105331,
+        47.46013392247843
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000062",
+      "split": "train",
+      "track_points": 3378,
+      "nodes": 30613,
+      "directed_arcs": 62836,
+      "route_arcs": 497,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 3378,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 38410,
+      "positive_rows": 3378,
+      "reference_distance_m_p50_p90_p99": [
+        4.731613840449416,
+        11.774321801377976,
+        19.19481737273566
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        12.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000063",
+      "split": "train",
+      "track_points": 2781,
+      "nodes": 2617,
+      "directed_arcs": 5553,
+      "route_arcs": 565,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2781,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 29648,
+      "positive_rows": 2781,
+      "reference_distance_m_p50_p90_p99": [
+        4.4735216322760545,
+        10.714031973169874,
+        19.061269730616004
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        12.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000064",
+      "split": "train",
+      "track_points": 2093,
+      "nodes": 28258,
+      "directed_arcs": 56986,
+      "route_arcs": 692,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2093,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 18101,
+      "positive_rows": 2093,
+      "reference_distance_m_p50_p90_p99": [
+        4.778551711687009,
+        12.337259592084692,
+        23.02280682185348
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000066",
+      "split": "train",
+      "track_points": 4325,
+      "nodes": 9609,
+      "directed_arcs": 20071,
+      "route_arcs": 365,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 3921,
+      "unmatched_or_low_confidence_points": 404,
+      "candidate_rows": 16418,
+      "positive_rows": 3921,
+      "reference_distance_m_p50_p90_p99": [
+        6.570661628072068,
+        22.719513968114036,
+        635.9383109668053
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        4.0,
+        8.0
+      ]
+    },
+    {
+      "trip_id": "00000068",
+      "split": "train",
+      "track_points": 747,
+      "nodes": 3537,
+      "directed_arcs": 7058,
+      "route_arcs": 240,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 746,
+      "unmatched_or_low_confidence_points": 1,
+      "candidate_rows": 8744,
+      "positive_rows": 746,
+      "reference_distance_m_p50_p90_p99": [
+        3.965220096432422,
+        10.299409374052663,
+        20.647214138062807
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        12.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000069",
+      "split": "train",
+      "track_points": 2067,
+      "nodes": 8556,
+      "directed_arcs": 17193,
+      "route_arcs": 467,
+      "route_directed_continuity_fraction": 0.9978540772532188,
+      "reference_matched_points": 2067,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 25823,
+      "positive_rows": 2067,
+      "reference_distance_m_p50_p90_p99": [
+        4.882236444481867,
+        11.310562586043941,
+        18.95091026736328
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000070",
+      "split": "train",
+      "track_points": 2076,
+      "nodes": 1799,
+      "directed_arcs": 3776,
+      "route_arcs": 149,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2076,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 17430,
+      "positive_rows": 2076,
+      "reference_distance_m_p50_p90_p99": [
+        4.197586656402255,
+        11.084619843054035,
+        21.478044782898507
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000071",
+      "split": "train",
+      "track_points": 850,
+      "nodes": 6265,
+      "directed_arcs": 14868,
+      "route_arcs": 186,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 850,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 8612,
+      "positive_rows": 850,
+      "reference_distance_m_p50_p90_p99": [
+        3.9940370242143586,
+        9.509456162182673,
+        14.827605886257077
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000072",
+      "split": "train",
+      "track_points": 969,
+      "nodes": 3275,
+      "directed_arcs": 7063,
+      "route_arcs": 131,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 969,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 11374,
+      "positive_rows": 969,
+      "reference_distance_m_p50_p90_p99": [
+        5.703411868191391,
+        12.304678854765207,
+        17.81872675421039
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        14.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000074",
+      "split": "train",
+      "track_points": 1929,
+      "nodes": 34654,
+      "directed_arcs": 61055,
+      "route_arcs": 305,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1929,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 19450,
+      "positive_rows": 1929,
+      "reference_distance_m_p50_p90_p99": [
+        5.032931055095411,
+        12.460351035024981,
+        19.619195520559277
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        11.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000075",
+      "split": "train",
+      "track_points": 1628,
+      "nodes": 1022,
+      "directed_arcs": 2124,
+      "route_arcs": 108,
+      "route_directed_continuity_fraction": 0.9813084112149533,
+      "reference_matched_points": 1628,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 15342,
+      "positive_rows": 1628,
+      "reference_distance_m_p50_p90_p99": [
+        4.09925159063205,
+        10.588540609081972,
+        24.170514823206776
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000078",
+      "split": "train",
+      "track_points": 2909,
+      "nodes": 75230,
+      "directed_arcs": 151458,
+      "route_arcs": 1765,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2897,
+      "unmatched_or_low_confidence_points": 12,
+      "candidate_rows": 28769,
+      "positive_rows": 2897,
+      "reference_distance_m_p50_p90_p99": [
+        4.385536784670892,
+        11.86924427342733,
+        38.68799796925735
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000079",
+      "split": "train",
+      "track_points": 689,
+      "nodes": 39031,
+      "directed_arcs": 72116,
+      "route_arcs": 182,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 689,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 10204,
+      "positive_rows": 689,
+      "reference_distance_m_p50_p90_p99": [
+        4.243980065766205,
+        11.596124786434896,
+        20.83449799599647
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000080",
+      "split": "train",
+      "track_points": 2510,
+      "nodes": 10014,
+      "directed_arcs": 18746,
+      "route_arcs": 139,
+      "route_directed_continuity_fraction": 0.9927536231884058,
+      "reference_matched_points": 2505,
+      "unmatched_or_low_confidence_points": 5,
+      "candidate_rows": 15666,
+      "positive_rows": 2505,
+      "reference_distance_m_p50_p90_p99": [
+        7.360591049808733,
+        23.582374838447844,
+        35.31263883882487
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        10.0
+      ]
+    },
+    {
+      "trip_id": "00000081",
+      "split": "train",
+      "track_points": 3224,
+      "nodes": 2791,
+      "directed_arcs": 5048,
+      "route_arcs": 778,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 3063,
+      "unmatched_or_low_confidence_points": 161,
+      "candidate_rows": 26929,
+      "positive_rows": 3063,
+      "reference_distance_m_p50_p90_p99": [
+        4.531595182899105,
+        16.943527606453056,
+        137.21438974328458
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000082",
+      "split": "train",
+      "track_points": 4268,
+      "nodes": 15696,
+      "directed_arcs": 31754,
+      "route_arcs": 204,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 4268,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 36566,
+      "positive_rows": 4268,
+      "reference_distance_m_p50_p90_p99": [
+        3.9753116631889593,
+        9.876880666265867,
+        20.502871375744913
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000083",
+      "split": "train",
+      "track_points": 1507,
+      "nodes": 12907,
+      "directed_arcs": 25393,
+      "route_arcs": 143,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1507,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 20517,
+      "positive_rows": 1507,
+      "reference_distance_m_p50_p90_p99": [
+        5.150336723231172,
+        14.096728055806588,
+        25.029305062981066
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000084",
+      "split": "validation",
+      "track_points": 16031,
+      "nodes": 24898,
+      "directed_arcs": 50888,
+      "route_arcs": 627,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 15410,
+      "unmatched_or_low_confidence_points": 621,
+      "candidate_rows": 100101,
+      "positive_rows": 15410,
+      "reference_distance_m_p50_p90_p99": [
+        6.551437514155688,
+        20.98493497768824,
+        76.72422775288607
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        14.0
+      ]
+    },
+    {
+      "trip_id": "00000085",
+      "split": "validation",
+      "track_points": 1092,
+      "nodes": 690,
+      "directed_arcs": 1554,
+      "route_arcs": 170,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1079,
+      "unmatched_or_low_confidence_points": 13,
+      "candidate_rows": 8762,
+      "positive_rows": 1079,
+      "reference_distance_m_p50_p90_p99": [
+        4.319055273331607,
+        11.495435218386064,
+        50.360636287021
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000086",
+      "split": "train",
+      "track_points": 4143,
+      "nodes": 114868,
+      "directed_arcs": 237656,
+      "route_arcs": 671,
+      "route_directed_continuity_fraction": 0.9985074626865672,
+      "reference_matched_points": 4143,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 22558,
+      "positive_rows": 4143,
+      "reference_distance_m_p50_p90_p99": [
+        4.189463686525337,
+        10.364468410488987,
+        16.48174630756908
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        4.0,
+        12.0
+      ]
+    },
+    {
+      "trip_id": "00000088",
+      "split": "validation",
+      "track_points": 876,
+      "nodes": 11373,
+      "directed_arcs": 24376,
+      "route_arcs": 163,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 876,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 13588,
+      "positive_rows": 876,
+      "reference_distance_m_p50_p90_p99": [
+        4.001159302695512,
+        9.749893070165017,
+        15.776888782530104
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000089",
+      "split": "train",
+      "track_points": 1228,
+      "nodes": 15972,
+      "directed_arcs": 32823,
+      "route_arcs": 265,
+      "route_directed_continuity_fraction": 0.9962121212121212,
+      "reference_matched_points": 1228,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 18841,
+      "positive_rows": 1228,
+      "reference_distance_m_p50_p90_p99": [
+        4.8771976092444564,
+        12.69405187242218,
+        20.433086652268436
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000090",
+      "split": "train",
+      "track_points": 536,
+      "nodes": 4010,
+      "directed_arcs": 7942,
+      "route_arcs": 235,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 536,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 6972,
+      "positive_rows": 536,
+      "reference_distance_m_p50_p90_p99": [
+        4.617420144304848,
+        10.783764713813639,
+        16.585913907295105
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000092",
+      "split": "train",
+      "track_points": 7892,
+      "nodes": 26468,
+      "directed_arcs": 53348,
+      "route_arcs": 2266,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 7892,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 79070,
+      "positive_rows": 7892,
+      "reference_distance_m_p50_p90_p99": [
+        4.284078001479478,
+        10.656712718085442,
+        18.329976022959194
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        10.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000093",
+      "split": "train",
+      "track_points": 1211,
+      "nodes": 45161,
+      "directed_arcs": 85122,
+      "route_arcs": 590,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1199,
+      "unmatched_or_low_confidence_points": 12,
+      "candidate_rows": 16517,
+      "positive_rows": 1199,
+      "reference_distance_m_p50_p90_p99": [
+        6.2320680951448795,
+        19.568524758091556,
+        39.27928747487781
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000095",
+      "split": "train",
+      "track_points": 1551,
+      "nodes": 1888,
+      "directed_arcs": 3723,
+      "route_arcs": 306,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1551,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 19983,
+      "positive_rows": 1551,
+      "reference_distance_m_p50_p90_p99": [
+        3.9659812651282365,
+        10.333179450215914,
+        16.62447383123323
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        14.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000096",
+      "split": "train",
+      "track_points": 3271,
+      "nodes": 16893,
+      "directed_arcs": 32276,
+      "route_arcs": 456,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 3126,
+      "unmatched_or_low_confidence_points": 145,
+      "candidate_rows": 24600,
+      "positive_rows": 3126,
+      "reference_distance_m_p50_p90_p99": [
+        4.441010480682283,
+        12.273713999653182,
+        81.93020008755714
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000097",
+      "split": "train",
+      "track_points": 1740,
+      "nodes": 23566,
+      "directed_arcs": 48503,
+      "route_arcs": 444,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 1740,
+      "unmatched_or_low_confidence_points": 0,
+      "candidate_rows": 15337,
+      "positive_rows": 1740,
+      "reference_distance_m_p50_p90_p99": [
+        3.6159921119876746,
+        9.028782324399092,
+        14.70818171039996
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        8.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000098",
+      "split": "train",
+      "track_points": 5584,
+      "nodes": 43440,
+      "directed_arcs": 88137,
+      "route_arcs": 1003,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 5570,
+      "unmatched_or_low_confidence_points": 14,
+      "candidate_rows": 37024,
+      "positive_rows": 5570,
+      "reference_distance_m_p50_p90_p99": [
+        5.1406621477472,
+        12.76343809398517,
+        27.0580533098853
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        6.0,
+        16.0
+      ]
+    },
+    {
+      "trip_id": "00000099",
+      "split": "train",
+      "track_points": 2322,
+      "nodes": 34252,
+      "directed_arcs": 72870,
+      "route_arcs": 886,
+      "route_directed_continuity_fraction": 1.0,
+      "reference_matched_points": 2285,
+      "unmatched_or_low_confidence_points": 37,
+      "candidate_rows": 29169,
+      "positive_rows": 2285,
+      "reference_distance_m_p50_p90_p99": [
+        5.600482910612879,
+        16.562256978168683,
+        63.49805449113074
+      ],
+      "candidates_per_labeled_point_p50_p90": [
+        16.0,
+        16.0
+      ]
+    }
+  ]
+}

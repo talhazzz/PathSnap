@@ -226,3 +226,5 @@ data/raw/
 __pycache__/
 *.pyc
 artifacts/shared/*.csv
+!artifacts/shared/candidate_features_sample.csv
+.DS_Store

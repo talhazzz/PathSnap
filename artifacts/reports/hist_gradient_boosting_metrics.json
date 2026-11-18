@@ -1,0 +1,192 @@
+{
+  "model": "HistGradientBoostingClassifier",
+  "feature_columns": [
+    "distance_m",
+    "signed_lateral_offset_m",
+    "projection_fraction",
+    "distance_to_arc_start_m",
+    "distance_to_arc_end_m",
+    "arc_length_m",
+    "candidate_rank_distance",
+    "candidate_count_at_point",
+    "is_nearest_candidate",
+    "is_within_search_radius",
+    "gps_step_distance_m",
+    "gps_speed_m_per_time_unit",
+    "time_delta_units",
+    "gps_bearing_valid",
+    "heading_alignment_cos",
+    "heading_alignment_sin",
+    "is_self_loop"
+  ],
+  "model_parameters": {
+    "max_iter": 150,
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 30,
+    "l2_regularization": 1.0,
+    "random_state": 42
+  },
+  "class_balancing": true,
+  "data_source": "artifacts/shared/candidate_features.csv; train split only for fitting",
+  "student_test_used": false,
+  "train": {
+    "rows": 1317582,
+    "trips": 64,
+    "positive_rows": 146055,
+    "negative_rows": 1171527
+  },
+  "validation": {
+    "rows": 331842,
+    "trips": 16,
+    "positive_rows": 38593,
+    "negative_rows": 293249,
+    "candidate_row_metrics_at_threshold_0_5": {
+      "accuracy": 0.9211371676882372,
+      "precision": 0.6045056109830577,
+      "recall": 0.9309978493509186,
+      "f1": 0.7330409058451495,
+      "roc_auc": 0.9765050973854633,
+      "average_precision": 0.8679369158746987
+    },
+    "classifier_only_candidate_ranking": {
+      "point_count": 38593,
+      "top1_accuracy": 0.7987458865597388,
+      "macro_trip_top1_accuracy": 0.8382056336720685,
+      "per_trip_top1_accuracy": {
+        "00000001": 0.9505703422053232,
+        "00000005": 0.9712918660287081,
+        "00000013": 0.9403100775193799,
+        "00000016": 0.5517241379310345,
+        "00000024": 0.9725343320848939,
+        "00000028": 0.9333333333333333,
+        "00000035": 0.7583688374923919,
+        "00000037": 0.8862629246676514,
+        "00000038": 0.8391608391608392,
+        "00000041": 0.9057899901864573,
+        "00000043": 0.7456674473067916,
+        "00000055": 0.9672197490894374,
+        "00000061": 0.6269503546099291,
+        "00000084": 0.7142764438676185,
+        "00000085": 0.8202038924930491,
+        "00000088": 0.8276255707762558
+      }
+    },
+    "nearest_road_baseline": {
+      "point_count": 38593,
+      "top1_accuracy": 0.6069753582255849,
+      "macro_trip_top1_accuracy": 0.6607407982130475,
+      "per_trip_top1_accuracy": {
+        "00000001": 0.7946768060836502,
+        "00000005": 0.9559808612440192,
+        "00000013": 0.8523255813953489,
+        "00000016": 0.3839080459770115,
+        "00000024": 0.8726591760299626,
+        "00000028": 0.535593220338983,
+        "00000035": 0.6482045039561777,
+        "00000037": 0.6587887740029542,
+        "00000038": 0.7156177156177156,
+        "00000041": 0.5260058881256133,
+        "00000043": 0.5489461358313817,
+        "00000055": 0.8802104411169567,
+        "00000061": 0.4056737588652482,
+        "00000084": 0.5166125892277742,
+        "00000085": 0.5894346617238183,
+        "00000088": 0.6872146118721462
+      }
+    }
+  },
+  "feature_importance": {
+    "method": "permutation importance on held-out validation rows",
+    "scoring": "average_precision",
+    "sample_rows": 20000,
+    "repeats": 3,
+    "values": [
+      {
+        "feature": "heading_alignment_cos",
+        "mean": 0.35640072577302395,
+        "std": 0.00614217151234549
+      },
+      {
+        "feature": "distance_m",
+        "mean": 0.15789346577496868,
+        "std": 0.004052516037775324
+      },
+      {
+        "feature": "candidate_rank_distance",
+        "mean": 0.13383105717830332,
+        "std": 0.005796831247545674
+      },
+      {
+        "feature": "projection_fraction",
+        "mean": 0.09489480354358153,
+        "std": 0.002397738398447988
+      },
+      {
+        "feature": "distance_to_arc_end_m",
+        "mean": 0.0945635732762327,
+        "std": 0.0035038087826500114
+      },
+      {
+        "feature": "gps_step_distance_m",
+        "mean": 0.04457008613989618,
+        "std": 0.001857125688572231
+      },
+      {
+        "feature": "signed_lateral_offset_m",
+        "mean": 0.023639647593950246,
+        "std": 0.0010758590101869949
+      },
+      {
+        "feature": "candidate_count_at_point",
+        "mean": 0.012526014591999904,
+        "std": 0.002467271152424995
+      },
+      {
+        "feature": "heading_alignment_sin",
+        "mean": 0.006817086110660379,
+        "std": 0.0007295652267610506
+      },
+      {
+        "feature": "distance_to_arc_start_m",
+        "mean": 0.006068078853280608,
+        "std": 0.0004676161321768042
+      },
+      {
+        "feature": "arc_length_m",
+        "mean": 0.005062185185290224,
+        "std": 0.0017653428657759416
+      },
+      {
+        "feature": "gps_speed_m_per_time_unit",
+        "mean": 0.0012834648073517159,
+        "std": 0.00024019000615517472
+      },
+      {
+        "feature": "is_nearest_candidate",
+        "mean": 0.0002470656905996978,
+        "std": 2.0544709899691167e-05
+      },
+      {
+        "feature": "time_delta_units",
+        "mean": 6.473293526147265e-05,
+        "std": 6.096824553222722e-05
+      },
+      {
+        "feature": "is_within_search_radius",
+        "mean": 0.0,
+        "std": 0.0
+      },
+      {
+        "feature": "gps_bearing_valid",
+        "mean": 0.0,
+        "std": 0.0
+      },
+      {
+        "feature": "is_self_loop",
+        "mean": 0.0,
+        "std": 0.0
+      }
+    ]
+  }
+}

@@ -9,6 +9,10 @@ model:
 training:
   balance_classes: true
 
+feature_importance:
+  validation_sample_size: 20000
+  repeats: 3
+
 paths:
   dataset: artifacts/shared/candidate_features.csv
   model: artifacts/models/hist_gradient_boosting.joblib

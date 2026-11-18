@@ -1,0 +1,87 @@
+{
+  "method": "scikit-optimize Optimizer with expected improvement",
+  "objective": "mean grouped-fold average precision",
+  "student_test_used": false,
+  "training_trips_for_search": 64,
+  "training_rows_for_search": 64000,
+  "max_rows_per_trip": 1000,
+  "cv_splits": 2,
+  "evaluations": 5,
+  "best_cv_average_precision": 0.8897697509875824,
+  "best_parameters": {
+    "max_iter": 160,
+    "learning_rate": 0.03165580522343057,
+    "max_leaf_nodes": 58,
+    "min_samples_leaf": 58,
+    "l2_regularization": 0.4872618118953884
+  },
+  "baseline_validation": {
+    "candidate_row_metrics_at_threshold_0_5": {
+      "accuracy": 0.9211371676882372,
+      "precision": 0.6045056109830577,
+      "recall": 0.9309978493509186,
+      "f1": 0.7330409058451495,
+      "roc_auc": 0.9765050973854633,
+      "average_precision": 0.8679369158746987
+    },
+    "classifier_only_candidate_ranking": {
+      "point_count": 38593,
+      "top1_accuracy": 0.7987458865597388,
+      "macro_trip_top1_accuracy": 0.8382056336720685,
+      "per_trip_top1_accuracy": {
+        "00000001": 0.9505703422053232,
+        "00000005": 0.9712918660287081,
+        "00000013": 0.9403100775193799,
+        "00000016": 0.5517241379310345,
+        "00000024": 0.9725343320848939,
+        "00000028": 0.9333333333333333,
+        "00000035": 0.7583688374923919,
+        "00000037": 0.8862629246676514,
+        "00000038": 0.8391608391608392,
+        "00000041": 0.9057899901864573,
+        "00000043": 0.7456674473067916,
+        "00000055": 0.9672197490894374,
+        "00000061": 0.6269503546099291,
+        "00000084": 0.7142764438676185,
+        "00000085": 0.8202038924930491,
+        "00000088": 0.8276255707762558
+      }
+    }
+  },
+  "tuned_validation": {
+    "candidate_row_metrics_at_threshold_0_5": {
+      "accuracy": 0.9193351052609374,
+      "precision": 0.5983269860803911,
+      "recall": 0.9322415982172932,
+      "f1": 0.7288602568777602,
+      "roc_auc": 0.9756178092995821,
+      "average_precision": 0.8633943232115164
+    },
+    "classifier_only_candidate_ranking": {
+      "point_count": 38593,
+      "top1_accuracy": 0.7973466690850672,
+      "macro_trip_top1_accuracy": 0.8374579813606873,
+      "per_trip_top1_accuracy": {
+        "00000001": 0.9513307984790874,
+        "00000005": 0.9712918660287081,
+        "00000013": 0.936046511627907,
+        "00000016": 0.5478927203065134,
+        "00000024": 0.9737827715355806,
+        "00000028": 0.9341807909604519,
+        "00000035": 0.7620206938527084,
+        "00000037": 0.8877400295420975,
+        "00000038": 0.8438228438228438,
+        "00000041": 0.9018645731108931,
+        "00000043": 0.7484777517564403,
+        "00000055": 0.9664103601780656,
+        "00000061": 0.6184397163120567,
+        "00000084": 0.7114860480207658,
+        "00000085": 0.8294717330861909,
+        "00000088": 0.815068493150685
+      }
+    }
+  },
+  "results_csv": "artifacts/reports/bayesian_optimization_results.csv",
+  "tuned_model": "artifacts/models/hist_gradient_boosting_bayesian.joblib",
+  "best_parameters_json": "artifacts/reports/hist_gradient_boosting_best_parameters.json"
+}
