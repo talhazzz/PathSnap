@@ -226,5 +226,15 @@ data/raw/
 __pycache__/
 *.pyc
 artifacts/shared/*.csv
-!artifacts/shared/candidate_features_sample.csv
-.DS_Store
+
+frontend/node_modules/
+frontend/dist/
+backend/.venv/
+__pycache__/
+*.pyc
+
+frontend/node_modules/
+frontend/dist/
+backend/.venv/
+__pycache__/
+*.pyc
