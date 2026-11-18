@@ -1,0 +1,26 @@
+data:
+  root: data/raw/Student folder
+  training_partition: train
+  # student_test is deliberately never read by the training pipeline.
+
+output:
+  directory: artifacts/shared
+  candidate_features: candidate_features.csv
+  sample: candidate_features_sample.csv
+  split: trip_split.csv
+  summary: shared_pipeline_summary.json
+
+candidate_generation:
+  search_radius_m: 60.0
+  max_candidates_per_point: 16
+  label_max_distance_m: 45.0
+
+labeling:
+  route_advance_penalty: 0.15
+
+validation:
+  fraction: 0.2
+  random_seed: 42
+
+sample:
+  max_rows: 5000
