@@ -1,6 +1,17 @@
 ﻿fastapi
 uvicorn[standard]
+pydantic
 numpy
 pandas
+scipy
 scikit-learn
 joblib
+shapely
+folium
+optuna
+matplotlib
+seaborn
+pyyaml
+google-genai>=2.30.1
+httpx
+pytest

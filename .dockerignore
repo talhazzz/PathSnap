@@ -1,0 +1,12 @@
+.git
+.venv
+backend/.venv
+frontend
+node_modules
+**/__pycache__
+**/*.pyc
+.env
+backend/.env
+backend/data/processed
+backend/data/raw/Student folder/train
+backend/logs
