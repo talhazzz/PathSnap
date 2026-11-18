@@ -1,0 +1,16 @@
+{
+  "trip_id": "00000005",
+  "partition": "train",
+  "internal_split": "validation",
+  "points_decoded": 1045,
+  "reference_route_arc_count": 105,
+  "classifier_only_candidate_label_accuracy": 0.9712918660287081,
+  "decoded_candidate_label_accuracy": 0.9741626794258373,
+  "segments": 1,
+  "connectivity_resets": 0,
+  "connected_transitions": 1044,
+  "connectivity_violations": 0,
+  "same_segment_transitions": 1044,
+  "model_probabilities_used": true,
+  "student_test_used": false
+}

@@ -33,31 +33,44 @@ backend/data/raw/Student folder/
 └── evaluator_test/ (optional — drop the 10 reserved evaluator trips here at demo time)
 ```
 
-### 3. Train & Evaluate Decision Tree and Random Forest (5-Fold GroupKFold + Student-Test)
+### 3. Train & Evaluate All 5 Models (Trip-Level Splits, Zero Leakage)
 ```powershell
+# Decision Tree & Random Forest (5-fold GroupKFold CV + validation + student_test)
 backend\.venv\Scripts\python.exe -m backend.src.train_models
+
+# HistGradientBoosting (ml-dev config), KNN (scaled KD-tree), Linear Regression (OLS candidate scorer)
+backend\.venv\Scripts\python.exe -m backend.src.train_extra_models
 ```
 Outputs:
-- `backend/models/decision_tree.joblib`
-- `backend/models/random_forest.joblib`
+- `backend/models/{decision_tree,random_forest,hist_gradient_boosting,knn,linear_regression}.joblib`
 - `backend/experiments/decision_tree_random_forest_training.csv`
 - `backend/experiments/model_comparison_mithun.json`
+- `backend/experiments/extra_models_metrics.json`
 
-### 4. Run Optuna Bayesian Hyperparameter Optimization (Random Forest)
+### 4. Run Optuna TPE Bayesian Hyperparameter Optimization (HistGradientBoosting)
 ```powershell
-backend\.venv\Scripts\python.exe -m backend.src.tune_random_forest
+backend\.venv\Scripts\python.exe -m backend.src.tune_hgb
 ```
 Outputs:
-- `backend/models/random_forest_tuned.joblib`
-- `backend/experiments/rf_optuna_trials.csv`
-- `backend/experiments/rf_tuning_summary.json`
+- `backend/models/hist_gradient_boosting_tuned.joblib`
+- `backend/experiments/hgb_optuna_trials.csv`
+- `backend/experiments/hgb_tuning_summary.json`
 
-### 5. Generate Evaluation Plots & Interactive Folium Maps
+### 5. Evaluate All Models Across All 10 Evaluation Trips (Classifier-Only vs HMM/Viterbi)
+```powershell
+backend\.venv\Scripts\python.exe -m backend.src.evaluate_all_models
+```
+Outputs:
+- `backend/experiments/all_models_comparison.csv`
+- `backend/experiments/student_test_10trips_final_model.csv`
+- `backend/experiments/all_models_student_test_summary.json`
+
+### 6. Generate Evaluation Plots & Interactive Folium Maps
 ```powershell
 backend\.venv\Scripts\python.exe -m backend.src.generate_artifacts
 ```
 Outputs:
-- `backend/experiments/plots/*.png` (model comparisons, confusion matrices, Optuna history, HMM vs Classifier-only charts)
+- `backend/experiments/plots/*.png` (5-model + tuned comparisons, confusion matrices, Optuna TPE history, HMM vs raw model charts)
 - `backend/experiments/maps/*.html` (interactive Folium maps with GPS points, road network, reference route, predicted HMM route, legend, and layer controls)
 
 ### 6. Run Automated End-to-End Tests
@@ -114,7 +127,23 @@ http://<LAPTOP1_IP>:8000/docs
 | `GET` | `/health` | Healthcheck and loaded model list |
 | `GET` | `/models` | Lists available `.joblib` models and artifact sizes |
 | `GET` | `/trips` | Lists the 10 evaluation trips with non-leaky telemetry (no ground truth exposed) |
-| `POST` | `/predict` | Batch candidate-level prediction (`model_name`, `features` list of 17-feature dicts) |
+| `GET` | `/trips/{trip_id}/geometry` | Returns raw GPS trajectory polyline for a trip (no ground truth exposed) |
+| `POST` | `/predict` | Batch candidate-level scoring/prediction (`model_name`, `features` list of 17-feature dicts) |
 | `POST` | `/predict/trip/{trip_id}` | Full end-to-end map matching: 17-feature candidate extraction -> ML classifier -> HMM/Viterbi decoding -> predicted route polyline + server-side accuracy (never leaks raw reference route) |
 | `GET` | `/trips/{trip_id}/map` | Interactive Folium HTML map for the reconstructed trip route |
 | `GET` | `/metrics/summary` | Returns recorded CV, student-test, Bayesian tuning, and HMM evaluation summaries |
+| `POST` | `/ai/explain-trip` | Optional Gemini-powered AI Route Analyst explaining trip summary statistics (gracefully degrades if `GEMINI_API_KEY` is unset; never receives ground truth) |
+
+---
+
+## Optional Gemini AI Route Analyst Configuration
+
+PathSnap includes an optional natural-language AI Route Analyst (`backend/src/gemini_explainer.py`, `POST /ai/explain-trip`) powered by the official `google-genai` SDK (`gemini-3.8-flash`). Core map matching is **100% independent** and continues working normally if no API key is set.
+
+1. Copy `backend/.env.example` to `backend/.env` (`.env` is gitignored — never commit real keys).
+2. Add your free-tier Gemini API key:
+   ```text
+   GEMINI_API_KEY=YOUR_KEY_HERE
+   GEMINI_MODEL=gemini-3.8-flash
+   ```
+3. Restart FastAPI on Laptop 1. Check `GET /health` → `"ai_analyst_ready": true`.

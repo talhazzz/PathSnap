@@ -1,0 +1,7 @@
+model,display_name,algorithm_family,model_type,trips_passed,trips_total,student_test_macro_f1,student_test_log_loss,clf_top1_accuracy,hmm_top1_accuracy,clf_route_continuity,hmm_route_continuity,clf_route_f1,hmm_route_f1,hmm_route_jaccard,candidate_miss_rate,mean_ml_inference_s,mean_total_trip_s
+hist_gradient_boosting_tuned,HistGradientBoosting (Optuna Tuned),Boosting (Optuna TPE Tuned),classifier,10,10,0.9061,0.0803,0.8453,0.9225,0.7471,0.9999,0.8091,0.947,0.9028,0.0003,0.0351,1.3327
+hist_gradient_boosting,HistGradientBoosting,Boosting,classifier,10,10,0.8687,0.1402,0.8481,0.9285,0.7478,0.9999,0.8075,0.957,0.9193,0.0003,0.045,1.2287
+random_forest,Random Forest,Ensemble (Bagging),classifier,10,10,0.887,0.1153,0.8444,0.9267,0.7475,0.9999,0.8088,0.9564,0.9182,0.0003,0.1188,1.2226
+decision_tree,Decision Tree,Tree-based,classifier,10,10,0.8582,0.1829,0.8282,0.9049,0.7101,0.9989,0.7955,0.9258,0.8653,0.0003,0.0025,1.1324
+knn,K-Nearest Neighbors (KNN),Instance-based,classifier,10,10,0.8778,0.1355,0.8135,0.8953,0.7168,0.998,0.7852,0.9155,0.8491,0.0003,5.137,6.3234
+linear_regression,Linear Regression (Candidate Scorer),Linear (OLS Candidate Ranking),regression_scorer,10,10,0.7528,,0.5652,0.8566,0.4649,0.9998,0.5839,0.922,0.8619,0.0003,0.1166,1.3138

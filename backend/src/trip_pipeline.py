@@ -22,28 +22,72 @@ from shapely.geometry import LineString, Point, box
 from shapely.strtree import STRtree
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
+REPO_ROOT = BACKEND_DIR.parent
 DEFAULT_DATA_ROOT = BACKEND_DIR / "data" / "raw" / "Student folder"
 
-# Canonical 17 model-input feature columns (exact order from shared schema)
-FEATURE_COLUMNS: list[str] = [
-    "distance_m",
-    "signed_lateral_offset_m",
-    "projection_fraction",
-    "distance_to_arc_start_m",
-    "distance_to_arc_end_m",
-    "arc_length_m",
-    "candidate_rank_distance",
-    "candidate_count_at_point",
-    "is_nearest_candidate",
-    "is_within_search_radius",
-    "gps_step_distance_m",
-    "gps_speed_mps",
-    "time_delta_s",
-    "gps_bearing_valid",
-    "heading_alignment_cos",
-    "heading_alignment_sin",
-    "is_self_loop",
-]
+# Import Medha's canonical 17-feature list directly from ml/preprocessing when available
+try:
+    from ml.preprocessing.build_shared_dataset import FEATURE_COLUMNS as CANONICAL_ML_FEATURES
+    FEATURE_COLUMNS: list[str] = list(CANONICAL_ML_FEATURES)
+except Exception:
+    FEATURE_COLUMNS = [
+        "distance_m",
+        "signed_lateral_offset_m",
+        "projection_fraction",
+        "distance_to_arc_start_m",
+        "distance_to_arc_end_m",
+        "arc_length_m",
+        "candidate_rank_distance",
+        "candidate_count_at_point",
+        "is_nearest_candidate",
+        "is_within_search_radius",
+        "gps_step_distance_m",
+        "gps_speed_m_per_time_unit",
+        "time_delta_units",
+        "gps_bearing_valid",
+        "heading_alignment_cos",
+        "heading_alignment_sin",
+        "is_self_loop",
+    ]
+
+# Exact formula-identical column aliases between ml-dev cf6b948 and 7bab901
+FEATURE_COLUMN_ALIASES: dict[str, str] = {
+    "gps_speed_m_per_time_unit": "gps_speed_mps",
+    "gps_speed_mps": "gps_speed_m_per_time_unit",
+    "time_delta_units": "time_delta_s",
+    "time_delta_s": "time_delta_units",
+}
+
+
+def align_feature_frame(frame: pd.DataFrame, expected_columns: list[str]) -> pd.DataFrame:
+    """Align a candidate feature DataFrame to a model artifact's exact expected_columns.
+
+    Transparently bridges the formula-identical column rename between ml-dev cf6b948
+    (gps_speed_mps / time_delta_s) and ml-dev 7bab901 (gps_speed_m_per_time_unit / time_delta_units),
+    while strictly rejecting any truly missing or unexpected columns.
+    """
+    aligned = frame.copy()
+    for col in expected_columns:
+        if col not in aligned.columns:
+            alias = FEATURE_COLUMN_ALIASES.get(col)
+            if alias and alias in aligned.columns:
+                aligned[col] = aligned[alias]
+
+    # Drop replaced alias columns only if they are not themselves expected
+    expected_set = set(expected_columns)
+    for col in list(aligned.columns):
+        if col not in expected_set:
+            alias = FEATURE_COLUMN_ALIASES.get(col)
+            if alias and alias in expected_set:
+                aligned = aligned.drop(columns=[col])
+
+    missing = expected_set - set(aligned.columns)
+    extra = set(aligned.columns) - expected_set
+    if missing or extra:
+        raise ValueError(
+            f"Feature mismatch. Missing: {sorted(missing)}; unexpected: {sorted(extra)}"
+        )
+    return aligned[expected_columns]
 
 
 def load_raw_table(path: Path, expected_cols: int, dtype: Any = float) -> np.ndarray:
@@ -207,6 +251,12 @@ def extract_trip_candidates(
     max_candidates: int = 16,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Extract canonical 17-feature candidate rows for inference (NEVER reads .route)."""
+    finite_mask = np.isfinite(track).all(axis=1)
+    if not finite_mask.all():
+        track = track[finite_mask]
+    if len(track) == 0 or len(arcs) == 0 or len(nodes) == 0:
+        raise ValueError(f"Trip {trip_id}: empty or invalid track/nodes/arcs input")
+
     origin_lon = float(np.median(track[:, 0]))
     origin_lat = float(np.median(track[:, 1]))
     track_xy = project_coordinates(track[:, :2], origin_lon, origin_lat)
@@ -319,8 +369,8 @@ def extract_trip_candidates(
                     "is_nearest_candidate": int(rank == 0),
                     "is_within_search_radius": int(dist <= search_radius_m),
                     "gps_step_distance_m": float(step_distance[point_idx]),
-                    "gps_speed_mps": float(speed[point_idx]),
-                    "time_delta_s": float(time_delta[point_idx]),
+                    "gps_speed_m_per_time_unit": float(speed[point_idx]),
+                    "time_delta_units": float(time_delta[point_idx]),
                     "gps_bearing_valid": int(gps_bearing_valid[point_idx]),
                     "heading_alignment_cos": float(cos_d),
                     "heading_alignment_sin": float(sin_d),
@@ -944,7 +994,11 @@ def run_trip_inference(
 
     model = model_artifact["model"]
     feature_cols = model_artifact["feature_columns"]
-    X = candidates_df[feature_cols].to_numpy(dtype=np.float32)
+    aligned_features = align_feature_frame(
+        candidates_df.drop(columns=["trip_id", "point_idx", "candidate_arc_id"]),
+        feature_cols,
+    )
+    X = aligned_features.to_numpy(dtype=np.float32)
 
     is_regression_scorer = (
         model_artifact.get("model_type") == "regression_scorer"

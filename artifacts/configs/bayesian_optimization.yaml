@@ -1,0 +1,13 @@
+search:
+  iterations: 5
+  cv_splits: 2
+  max_rows_per_trip: 1000
+  random_seed: 42
+
+paths:
+  dataset: artifacts/shared/candidate_features.csv
+  baseline_model: artifacts/models/hist_gradient_boosting.joblib
+  tuned_model: artifacts/models/hist_gradient_boosting_bayesian.joblib
+  results: artifacts/reports/bayesian_optimization_results.csv
+  metrics: artifacts/reports/bayesian_optimization_metrics.json
+  best_parameters: artifacts/reports/hist_gradient_boosting_best_parameters.json

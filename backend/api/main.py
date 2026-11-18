@@ -24,6 +24,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
+from backend.src.gemini_explainer import explain_trip_summary, is_gemini_configured
 from backend.src.train_models import (
     MODEL_DIR,
     RESULT_DIR,
@@ -35,6 +36,7 @@ from backend.src.train_models import (
 )
 from backend.src.trip_pipeline import (
     DEFAULT_DATA_ROOT,
+    align_feature_frame,
     generate_folium_map,
     load_trip_arrays,
     project_coordinates,
@@ -116,16 +118,24 @@ def _get_cached_model(model_name: str) -> dict[str, Any]:
 
 
 def _default_model_name() -> str:
-    """Pick best available trained model across backend/models and artifacts/models."""
+    """Pick best available trained model, prioritizing Medha's Bayesian-tuned HGB."""
     available = [m["name"] for m in list_available_models() if m["available"]]
-    for candidate in ("random_forest_tuned", "hist_gradient_boosting", "random_forest", "decision_tree"):
+    for candidate in (
+        "hist_gradient_boosting_bayesian",
+        "hist_gradient_boosting",
+        "hist_gradient_boosting_tuned",
+        "random_forest",
+        "decision_tree",
+        "knn",
+        "linear_regression",
+    ):
         if candidate in available:
             return candidate
     return available[0] if available else "random_forest"
 
 
 class PredictionRequest(BaseModel):
-    model_name: str = Field(default="random_forest_tuned")
+    model_name: str = Field(default="hist_gradient_boosting_bayesian")
     features: list[dict[str, float]]
 
 
@@ -133,6 +143,15 @@ class TripPredictionRequest(BaseModel):
     model_name: str | None = Field(default=None)
     use_hmm: bool = Field(default=True)
     partition: str | None = Field(default=None)
+
+
+class AIExplainTripRequest(BaseModel):
+    trip_id: str
+    model_name: str | None = Field(default=None)
+    use_hmm: bool = Field(default=True)
+    partition: str | None = Field(default=None)
+    # Optional precomputed non-leaky trip summary from POST /predict/trip/{trip_id}
+    summary: dict[str, Any] | None = Field(default=None)
 
 
 @app.get("/")
@@ -154,11 +173,13 @@ def root(request: Request):
 def health(request: Request):
     models = list_available_models()
     ready_models = [m["name"] for m in models if m["available"]]
+    gemini_status = is_gemini_configured()
     logger.info("GET /health from %s | ready_models=%s", request.client.host if request.client else "unknown", ready_models)
     return {
         "status": "healthy",
         "ready_models": ready_models,
         "default_model": _default_model_name(),
+        "ai_analyst_ready": gemini_status["ready"],
     }
 
 
@@ -240,7 +261,9 @@ def make_prediction(payload: PredictionRequest, request: Request):
         columns = artifact["feature_columns"]
         frame = pd.DataFrame(payload.features)
 
-        if set(frame.columns) != set(columns):
+        try:
+            frame = align_feature_frame(frame, columns)
+        except ValueError:
             raise HTTPException(
                 status_code=422,
                 detail={
@@ -368,6 +391,36 @@ def predict_trip(
     return result
 
 
+@app.get("/trips/{trip_id}/geometry")
+def get_trip_geometry(
+    trip_id: str,
+    request: Request,
+    partition: str | None = Query(default=None),
+):
+    """Return raw GPS trajectory coordinates for a trip (NO ground-truth route exposed)."""
+    part_name, part_dir = _resolve_partition_dir(partition)
+    try:
+        trip = load_trip_arrays(trip_id, part_dir, include_route=False)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+
+    track = trip["track"]
+    gps_coords = [[float(r[1]), float(r[0])] for r in track]
+    logger.info(
+        "GET /trips/%s/geometry from %s | partition=%s gps=%d",
+        trip_id,
+        request.client.host if request.client else "unknown",
+        part_name,
+        len(gps_coords),
+    )
+    return {
+        "trip_id": trip_id,
+        "partition": part_name,
+        "gps_points_count": len(gps_coords),
+        "gps_coordinates": gps_coords,
+    }
+
+
 @app.get("/trips/{trip_id}/map", response_class=HTMLResponse)
 def get_trip_map(
     trip_id: str,
@@ -415,13 +468,93 @@ def get_trip_map(
 
 @app.get("/metrics/summary")
 def get_metrics_summary(request: Request):
-    """Return recorded training, Bayesian tuning, and HMM evaluation summaries."""
+    """Return recorded training, Bayesian tuning, and 5-model evaluation summaries."""
     summary: dict[str, Any] = {}
-    comp_path = RESULT_DIR / "model_comparison_mithun.json"
-    tuning_path = RESULT_DIR / "rf_tuning_summary.json"
-    if comp_path.exists():
-        summary["baseline_models"] = json.loads(comp_path.read_text(encoding="utf-8"))
-    if tuning_path.exists():
-        summary["bayesian_tuning"] = json.loads(tuning_path.read_text(encoding="utf-8"))
+    for key, filename in [
+        ("baseline_dt_rf", "model_comparison_mithun.json"),
+        ("extra_models", "extra_models_metrics.json"),
+        ("bayesian_tuning_hgb", "hgb_tuning_summary.json"),
+        ("all_models_student_test", "all_models_student_test_summary.json"),
+    ]:
+        path = RESULT_DIR / filename
+        if path.exists():
+            summary[key] = json.loads(path.read_text(encoding="utf-8"))
     logger.info("GET /metrics/summary from %s", request.client.host if request.client else "unknown")
     return summary
+
+
+@app.post("/ai/explain-trip")
+def ai_explain_trip(payload: AIExplainTripRequest, request: Request):
+    """Optional Gemini-powered AI Route Analyst.
+
+    Accepts either a precomputed non-leaky trip prediction summary or runs the
+    selected pipeline (evaluate_server_side=False so ground truth NEVER enters prompts).
+    Always returns HTTP 200 with structured graceful degradation if GEMINI_API_KEY
+    is unconfigured or Gemini is unreachable; core map matching is unaffected.
+    """
+    chosen_model = payload.model_name or _default_model_name()
+
+    if payload.summary:
+        # Whitelist ONLY safe summary statistics (never coordinates or reference routes)
+        safe_keys = {
+            "trip_id",
+            "model_name",
+            "model_type",
+            "use_hmm",
+            "gps_points_count",
+            "candidate_rows_count",
+            "predicted_arc_count",
+            "approx_distance_km",
+            "duration_seconds",
+            "route_continuity",
+            "classifier_only_route_continuity",
+            "timings_seconds",
+        }
+        summary = {k: payload.summary[k] for k in safe_keys if k in payload.summary}
+        summary.setdefault("trip_id", payload.trip_id)
+        summary.setdefault("model_name", chosen_model)
+        summary.setdefault("use_hmm", payload.use_hmm)
+    else:
+        part_name, part_dir = _resolve_partition_dir(payload.partition)
+        try:
+            artifact = _get_cached_model(chosen_model)
+            res = run_trip_inference(
+                trip_id=payload.trip_id,
+                model_artifact=artifact,
+                partition_dir=part_dir,
+                use_hmm=payload.use_hmm,
+                evaluate_server_side=False,  # Ground truth NEVER enters AI prompts!
+            )
+        except FileNotFoundError as exc:
+            raise HTTPException(status_code=404, detail=str(exc))
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc))
+
+        summary = {
+            "trip_id": res["trip_id"],
+            "model_name": res["model_name"],
+            "model_type": res["model_type"],
+            "use_hmm": res["use_hmm"],
+            "gps_points_count": res["gps_points_count"],
+            "candidate_rows_count": res["candidate_rows_count"],
+            "predicted_arc_count": res["predicted_arc_count"],
+            "approx_distance_km": res["approx_distance_km"],
+            "duration_seconds": res["duration_seconds"],
+            "route_continuity": res["route_continuity"],
+            "classifier_only_route_continuity": res["classifier_only_route_continuity"],
+            "timings_seconds": res["timings_seconds"],
+        }
+
+    ai_result = explain_trip_summary(summary)
+    logger.info(
+        "POST /ai/explain-trip from %s | trip=%s model=%s ai_status=%s",
+        request.client.host if request.client else "unknown",
+        summary.get("trip_id"),
+        summary.get("model_name"),
+        ai_result.get("status"),
+    )
+    return {
+        "trip_id": summary.get("trip_id"),
+        "model_name": summary.get("model_name"),
+        **ai_result,
+    }

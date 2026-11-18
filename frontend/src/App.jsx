@@ -15,12 +15,14 @@ import {
   Route,
   Search,
   Settings,
+  Sparkles,
   Zap,
 } from "lucide-react";
 
 import RouteMap from "./components/RouteMap";
 import {
   API_BASE_URL,
+  explainTripWithAI,
   fetchHealth,
   fetchModels,
   fetchTrips,
@@ -59,6 +61,9 @@ function App() {
   const [predictionError, setPredictionError] = useState("");
   const [predictionResult, setPredictionResult] = useState(null);
   const [processedCount, setProcessedCount] = useState(0);
+
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiResponse, setAiResponse] = useState(null);
 
   const loadBackendData = useCallback(async () => {
     setBackendStatus("checking");
@@ -114,6 +119,7 @@ function App() {
     if (!selectedTripId || predicting) return;
     setPredicting(true);
     setPredictionError("");
+    setAiResponse(null);
     try {
       const result = await predictTrip(selectedTripId, {
         modelName: selectedModel || null,
@@ -126,6 +132,23 @@ function App() {
       setPredictionError(err.message || "Route reconstruction failed");
     } finally {
       setPredicting(false);
+    }
+  };
+
+  const handleExplainTrip = async () => {
+    if (!predictionResult || aiLoading) return;
+    setAiLoading(true);
+    try {
+      const res = await explainTripWithAI(predictionResult);
+      setAiResponse(res);
+    } catch (err) {
+      setAiResponse({
+        status: "error",
+        explanation: null,
+        message: err.message || "AI Route Analyst is temporarily unavailable.",
+      });
+    } finally {
+      setAiLoading(false);
     }
   };
 
@@ -612,6 +635,40 @@ function App() {
                     Candidate Miss Rate:{" "}
                     <strong>{formatPercent(serverEval.candidate_miss_rate)}</strong>
                   </span>
+                )}
+                <button
+                  className="secondary-button ai-trigger-button"
+                  onClick={handleExplainTrip}
+                  disabled={aiLoading}
+                >
+                  {aiLoading ? (
+                    <>
+                      <Loader2 size={14} className="spin" />
+                      Analyzing...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles size={14} />
+                      AI Route Analyst
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+
+            {aiResponse && (
+              <div className={`ai-analysis-box ${aiResponse.status === "ok" ? "" : "ai-analysis-notice"}`}>
+                <div className="ai-analysis-header">
+                  <Sparkles size={14} />
+                  <strong>
+                    PathSnap AI Route Analyst{" "}
+                    {aiResponse.model ? `(${aiResponse.model})` : ""}
+                  </strong>
+                </div>
+                {aiResponse.explanation ? (
+                  <p className="ai-analysis-text">{aiResponse.explanation}</p>
+                ) : (
+                  <p className="ai-analysis-text">{aiResponse.message}</p>
                 )}
               </div>
             )}

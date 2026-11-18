@@ -1,0 +1,742 @@
+{
+  "train": {
+    "partition": "train",
+    "trip_count": 80,
+    "total_track_points": 208417,
+    "total_nodes": 1933485,
+    "total_directed_arcs": 3876904,
+    "total_route_arcs": 31336,
+    "trips": [
+      {
+        "trip_id": "00000001",
+        "track_points": 1315,
+        "nodes": 88809,
+        "directed_arcs": 165790,
+        "route_arcs": 525,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000002",
+        "track_points": 7243,
+        "nodes": 7936,
+        "directed_arcs": 16139,
+        "route_arcs": 262,
+        "route_directed_continuity_fraction": 0.9961685823754789
+      },
+      {
+        "trip_id": "00000003",
+        "track_points": 821,
+        "nodes": 9138,
+        "directed_arcs": 18028,
+        "route_arcs": 79,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000004",
+        "track_points": 1064,
+        "nodes": 7350,
+        "directed_arcs": 15499,
+        "route_arcs": 320,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000005",
+        "track_points": 1045,
+        "nodes": 898,
+        "directed_arcs": 1579,
+        "route_arcs": 105,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000006",
+        "track_points": 1450,
+        "nodes": 3259,
+        "directed_arcs": 6757,
+        "route_arcs": 261,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000008",
+        "track_points": 3093,
+        "nodes": 4995,
+        "directed_arcs": 10421,
+        "route_arcs": 173,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000010",
+        "track_points": 2711,
+        "nodes": 8502,
+        "directed_arcs": 15715,
+        "route_arcs": 210,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000011",
+        "track_points": 2828,
+        "nodes": 2649,
+        "directed_arcs": 5393,
+        "route_arcs": 565,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000012",
+        "track_points": 1608,
+        "nodes": 16376,
+        "directed_arcs": 38599,
+        "route_arcs": 205,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000013",
+        "track_points": 2580,
+        "nodes": 155003,
+        "directed_arcs": 307392,
+        "route_arcs": 788,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000014",
+        "track_points": 448,
+        "nodes": 4067,
+        "directed_arcs": 8288,
+        "route_arcs": 164,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000016",
+        "track_points": 1305,
+        "nodes": 8205,
+        "directed_arcs": 15098,
+        "route_arcs": 204,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000018",
+        "track_points": 379,
+        "nodes": 5980,
+        "directed_arcs": 11545,
+        "route_arcs": 166,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000019",
+        "track_points": 2354,
+        "nodes": 52694,
+        "directed_arcs": 108517,
+        "route_arcs": 545,
+        "route_directed_continuity_fraction": 0.9944852941176471
+      },
+      {
+        "trip_id": "00000020",
+        "track_points": 2353,
+        "nodes": 2739,
+        "directed_arcs": 5958,
+        "route_arcs": 142,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000021",
+        "track_points": 15783,
+        "nodes": 732,
+        "directed_arcs": 1510,
+        "route_arcs": 277,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000022",
+        "track_points": 474,
+        "nodes": 9607,
+        "directed_arcs": 18982,
+        "route_arcs": 376,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000024",
+        "track_points": 801,
+        "nodes": 25782,
+        "directed_arcs": 51609,
+        "route_arcs": 249,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000025",
+        "track_points": 1179,
+        "nodes": 38035,
+        "directed_arcs": 85639,
+        "route_arcs": 283,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000026",
+        "track_points": 361,
+        "nodes": 2580,
+        "directed_arcs": 5043,
+        "route_arcs": 197,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000027",
+        "track_points": 694,
+        "nodes": 2756,
+        "directed_arcs": 5588,
+        "route_arcs": 138,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000028",
+        "track_points": 3565,
+        "nodes": 60628,
+        "directed_arcs": 127216,
+        "route_arcs": 618,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000029",
+        "track_points": 733,
+        "nodes": 10825,
+        "directed_arcs": 20868,
+        "route_arcs": 204,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000031",
+        "track_points": 4245,
+        "nodes": 59059,
+        "directed_arcs": 125831,
+        "route_arcs": 432,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000032",
+        "track_points": 2464,
+        "nodes": 124540,
+        "directed_arcs": 259437,
+        "route_arcs": 819,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000033",
+        "track_points": 5844,
+        "nodes": 3340,
+        "directed_arcs": 6360,
+        "route_arcs": 169,
+        "route_directed_continuity_fraction": 0.9940476190476191
+      },
+      {
+        "trip_id": "00000034",
+        "track_points": 3614,
+        "nodes": 19597,
+        "directed_arcs": 40971,
+        "route_arcs": 454,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000035",
+        "track_points": 1643,
+        "nodes": 21126,
+        "directed_arcs": 35212,
+        "route_arcs": 403,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000036",
+        "track_points": 1368,
+        "nodes": 4528,
+        "directed_arcs": 9619,
+        "route_arcs": 156,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000037",
+        "track_points": 677,
+        "nodes": 9472,
+        "directed_arcs": 21744,
+        "route_arcs": 163,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000038",
+        "track_points": 1287,
+        "nodes": 21046,
+        "directed_arcs": 42026,
+        "route_arcs": 221,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000039",
+        "track_points": 363,
+        "nodes": 1185,
+        "directed_arcs": 2388,
+        "route_arcs": 161,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000041",
+        "track_points": 1019,
+        "nodes": 7837,
+        "directed_arcs": 14317,
+        "route_arcs": 340,
+        "route_directed_continuity_fraction": 0.9970501474926253
+      },
+      {
+        "trip_id": "00000042",
+        "track_points": 7739,
+        "nodes": 49376,
+        "directed_arcs": 101128,
+        "route_arcs": 1440,
+        "route_directed_continuity_fraction": 0.9993050729673384
+      },
+      {
+        "trip_id": "00000043",
+        "track_points": 2322,
+        "nodes": 109070,
+        "directed_arcs": 215620,
+        "route_arcs": 427,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000044",
+        "track_points": 546,
+        "nodes": 4386,
+        "directed_arcs": 9209,
+        "route_arcs": 130,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000045",
+        "track_points": 640,
+        "nodes": 2034,
+        "directed_arcs": 4335,
+        "route_arcs": 59,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000046",
+        "track_points": 1401,
+        "nodes": 299,
+        "directed_arcs": 649,
+        "route_arcs": 66,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000047",
+        "track_points": 1272,
+        "nodes": 18388,
+        "directed_arcs": 39747,
+        "route_arcs": 188,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000048",
+        "track_points": 1240,
+        "nodes": 1308,
+        "directed_arcs": 2592,
+        "route_arcs": 149,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000050",
+        "track_points": 518,
+        "nodes": 2206,
+        "directed_arcs": 4576,
+        "route_arcs": 94,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000051",
+        "track_points": 984,
+        "nodes": 4181,
+        "directed_arcs": 8494,
+        "route_arcs": 299,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000053",
+        "track_points": 1304,
+        "nodes": 77905,
+        "directed_arcs": 148707,
+        "route_arcs": 754,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000054",
+        "track_points": 19313,
+        "nodes": 63822,
+        "directed_arcs": 116916,
+        "route_arcs": 422,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000055",
+        "track_points": 2472,
+        "nodes": 98511,
+        "directed_arcs": 198961,
+        "route_arcs": 475,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000057",
+        "track_points": 1645,
+        "nodes": 8929,
+        "directed_arcs": 18777,
+        "route_arcs": 300,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000058",
+        "track_points": 599,
+        "nodes": 22367,
+        "directed_arcs": 39383,
+        "route_arcs": 345,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000060",
+        "track_points": 854,
+        "nodes": 15128,
+        "directed_arcs": 30077,
+        "route_arcs": 520,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000061",
+        "track_points": 1430,
+        "nodes": 4947,
+        "directed_arcs": 10339,
+        "route_arcs": 296,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000062",
+        "track_points": 3378,
+        "nodes": 30613,
+        "directed_arcs": 62836,
+        "route_arcs": 497,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000063",
+        "track_points": 2781,
+        "nodes": 2617,
+        "directed_arcs": 5553,
+        "route_arcs": 565,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000064",
+        "track_points": 2093,
+        "nodes": 28258,
+        "directed_arcs": 56986,
+        "route_arcs": 692,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000066",
+        "track_points": 4325,
+        "nodes": 9609,
+        "directed_arcs": 20071,
+        "route_arcs": 365,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000068",
+        "track_points": 747,
+        "nodes": 3537,
+        "directed_arcs": 7058,
+        "route_arcs": 240,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000069",
+        "track_points": 2067,
+        "nodes": 8556,
+        "directed_arcs": 17193,
+        "route_arcs": 467,
+        "route_directed_continuity_fraction": 0.9978540772532188
+      },
+      {
+        "trip_id": "00000070",
+        "track_points": 2076,
+        "nodes": 1799,
+        "directed_arcs": 3776,
+        "route_arcs": 149,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000071",
+        "track_points": 850,
+        "nodes": 6265,
+        "directed_arcs": 14868,
+        "route_arcs": 186,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000072",
+        "track_points": 969,
+        "nodes": 3275,
+        "directed_arcs": 7063,
+        "route_arcs": 131,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000074",
+        "track_points": 1929,
+        "nodes": 34654,
+        "directed_arcs": 61055,
+        "route_arcs": 305,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000075",
+        "track_points": 1628,
+        "nodes": 1022,
+        "directed_arcs": 2124,
+        "route_arcs": 108,
+        "route_directed_continuity_fraction": 0.9813084112149533
+      },
+      {
+        "trip_id": "00000078",
+        "track_points": 2909,
+        "nodes": 75230,
+        "directed_arcs": 151458,
+        "route_arcs": 1765,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000079",
+        "track_points": 689,
+        "nodes": 39031,
+        "directed_arcs": 72116,
+        "route_arcs": 182,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000080",
+        "track_points": 2510,
+        "nodes": 10014,
+        "directed_arcs": 18746,
+        "route_arcs": 139,
+        "route_directed_continuity_fraction": 0.9927536231884058
+      },
+      {
+        "trip_id": "00000081",
+        "track_points": 3224,
+        "nodes": 2791,
+        "directed_arcs": 5048,
+        "route_arcs": 778,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000082",
+        "track_points": 4268,
+        "nodes": 15696,
+        "directed_arcs": 31754,
+        "route_arcs": 204,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000083",
+        "track_points": 1507,
+        "nodes": 12907,
+        "directed_arcs": 25393,
+        "route_arcs": 143,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000084",
+        "track_points": 16031,
+        "nodes": 24898,
+        "directed_arcs": 50888,
+        "route_arcs": 627,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000085",
+        "track_points": 1092,
+        "nodes": 690,
+        "directed_arcs": 1554,
+        "route_arcs": 170,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000086",
+        "track_points": 4143,
+        "nodes": 114868,
+        "directed_arcs": 237656,
+        "route_arcs": 671,
+        "route_directed_continuity_fraction": 0.9985074626865672
+      },
+      {
+        "trip_id": "00000088",
+        "track_points": 876,
+        "nodes": 11373,
+        "directed_arcs": 24376,
+        "route_arcs": 163,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000089",
+        "track_points": 1228,
+        "nodes": 15972,
+        "directed_arcs": 32823,
+        "route_arcs": 265,
+        "route_directed_continuity_fraction": 0.9962121212121212
+      },
+      {
+        "trip_id": "00000090",
+        "track_points": 536,
+        "nodes": 4010,
+        "directed_arcs": 7942,
+        "route_arcs": 235,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000092",
+        "track_points": 7892,
+        "nodes": 26468,
+        "directed_arcs": 53348,
+        "route_arcs": 2266,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000093",
+        "track_points": 1211,
+        "nodes": 45161,
+        "directed_arcs": 85122,
+        "route_arcs": 590,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000095",
+        "track_points": 1551,
+        "nodes": 1888,
+        "directed_arcs": 3723,
+        "route_arcs": 306,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000096",
+        "track_points": 3271,
+        "nodes": 16893,
+        "directed_arcs": 32276,
+        "route_arcs": 456,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000097",
+        "track_points": 1740,
+        "nodes": 23566,
+        "directed_arcs": 48503,
+        "route_arcs": 444,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000098",
+        "track_points": 5584,
+        "nodes": 43440,
+        "directed_arcs": 88137,
+        "route_arcs": 1003,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000099",
+        "track_points": 2322,
+        "nodes": 34252,
+        "directed_arcs": 72870,
+        "route_arcs": 886,
+        "route_directed_continuity_fraction": 1.0
+      }
+    ]
+  },
+  "student_test": {
+    "partition": "student_test",
+    "trip_count": 10,
+    "total_track_points": 19160,
+    "total_nodes": 90689,
+    "total_directed_arcs": 185041,
+    "total_route_arcs": 3477,
+    "trips": [
+      {
+        "trip_id": "00000000",
+        "track_points": 2503,
+        "nodes": 8542,
+        "directed_arcs": 18196,
+        "route_arcs": 179,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000007",
+        "track_points": 1354,
+        "nodes": 2061,
+        "directed_arcs": 4369,
+        "route_arcs": 123,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000009",
+        "track_points": 1049,
+        "nodes": 6745,
+        "directed_arcs": 13106,
+        "route_arcs": 429,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000040",
+        "track_points": 2995,
+        "nodes": 12945,
+        "directed_arcs": 27026,
+        "route_arcs": 309,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000052",
+        "track_points": 262,
+        "nodes": 1770,
+        "directed_arcs": 3577,
+        "route_arcs": 95,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000056",
+        "track_points": 3958,
+        "nodes": 14759,
+        "directed_arcs": 27631,
+        "route_arcs": 1323,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000065",
+        "track_points": 768,
+        "nodes": 6448,
+        "directed_arcs": 13184,
+        "route_arcs": 145,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000076",
+        "track_points": 1486,
+        "nodes": 26635,
+        "directed_arcs": 56027,
+        "route_arcs": 374,
+        "route_directed_continuity_fraction": 0.9973190348525469
+      },
+      {
+        "trip_id": "00000077",
+        "track_points": 3911,
+        "nodes": 4424,
+        "directed_arcs": 9622,
+        "route_arcs": 268,
+        "route_directed_continuity_fraction": 1.0
+      },
+      {
+        "trip_id": "00000091",
+        "track_points": 874,
+        "nodes": 6360,
+        "directed_arcs": 12303,
+        "route_arcs": 232,
+        "route_directed_continuity_fraction": 1.0
+      }
+    ]
+  }
+}

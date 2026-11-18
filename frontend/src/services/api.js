@@ -79,3 +79,34 @@ export function getTripMapUrl(
   if (partition) params.set("partition", partition);
   return `${API_BASE_URL}/trips/${encodeURIComponent(tripId)}/map?${params.toString()}`;
 }
+
+export async function explainTripWithAI(predictionResult) {
+  try {
+    const { data } = await apiClient.post(
+      "/ai/explain-trip",
+      {
+        trip_id: predictionResult.trip_id,
+        model_name: predictionResult.model_name,
+        use_hmm: predictionResult.use_hmm,
+        summary: {
+          trip_id: predictionResult.trip_id,
+          model_name: predictionResult.model_name,
+          model_type: predictionResult.model_type,
+          use_hmm: predictionResult.use_hmm,
+          gps_points_count: predictionResult.gps_points_count,
+          candidate_rows_count: predictionResult.candidate_rows_count,
+          predicted_arc_count: predictionResult.predicted_arc_count,
+          approx_distance_km: predictionResult.approx_distance_km,
+          duration_seconds: predictionResult.duration_seconds,
+          route_continuity: predictionResult.route_continuity,
+          classifier_only_route_continuity: predictionResult.classifier_only_route_continuity,
+          timings_seconds: predictionResult.timings_seconds,
+        },
+      },
+      { timeout: 35000 }
+    );
+    return data;
+  } catch (err) {
+    throw new Error(extractErrorMessage(err, "Unable to generate AI route explanation"));
+  }
+}

@@ -34,6 +34,7 @@ from sklearn.tree import DecisionTreeClassifier
 from backend.src.trip_pipeline import (
     DEFAULT_DATA_ROOT,
     FEATURE_COLUMNS,
+    align_feature_frame,
     run_trip_inference,
 )
 
@@ -305,15 +306,25 @@ def train_models(X, y, random_state=42):
 SHARED_MODEL_DIR = REPO_ROOT / "artifacts" / "models"
 
 MODEL_REGISTRY: dict[str, dict[str, str]] = {
+    "hist_gradient_boosting_bayesian": {
+        "display_name": "HistGradientBoosting (Bayesian Tuned)",
+        "model_type": "classifier",
+        "algorithm_family": "Boosting (Bayesian Optimized — ml-dev)",
+    },
+    "hist_gradient_boosting": {
+        "display_name": "HistGradientBoosting (Baseline)",
+        "model_type": "classifier",
+        "algorithm_family": "Boosting (Baseline — ml-dev)",
+    },
+    "hist_gradient_boosting_tuned": {
+        "display_name": "HistGradientBoosting (Optuna Tuned)",
+        "model_type": "classifier",
+        "algorithm_family": "Boosting (Optuna TPE Tuned)",
+    },
     "random_forest": {
         "display_name": "Random Forest",
         "model_type": "classifier",
         "algorithm_family": "Ensemble (Bagging)",
-    },
-    "hist_gradient_boosting": {
-        "display_name": "HistGradientBoosting",
-        "model_type": "classifier",
-        "algorithm_family": "Boosting",
     },
     "decision_tree": {
         "display_name": "Decision Tree",
@@ -334,8 +345,8 @@ MODEL_REGISTRY: dict[str, dict[str, str]] = {
 
 
 def _resolve_model_file(safe_name: str) -> Path | None:
-    """Resolve a .joblib artifact across backend/models and shared artifacts/models."""
-    for directory in (MODEL_DIR, SHARED_MODEL_DIR):
+    """Resolve a .joblib artifact, prioritizing shared artifacts/models/ (ml-dev) then backend/models/."""
+    for directory in (SHARED_MODEL_DIR, MODEL_DIR):
         candidate = directory / f"{safe_name}.joblib"
         if candidate.exists():
             return candidate
@@ -343,9 +354,9 @@ def _resolve_model_file(safe_name: str) -> Path | None:
 
 
 def list_available_models() -> list[dict[str, Any]]:
-    """List the 5 core registered models plus any additional discovered .joblib models."""
+    """List all registered models plus any additional discovered .joblib models."""
     discovered_set: set[str] = set()
-    for directory in (MODEL_DIR, SHARED_MODEL_DIR):
+    for directory in (SHARED_MODEL_DIR, MODEL_DIR):
         if directory.is_dir():
             discovered_set.update(p.stem for p in directory.glob("*.joblib"))
 
@@ -365,6 +376,12 @@ def list_available_models() -> list[dict[str, Any]]:
                 "algorithm_family": "Custom",
             },
         )
+        rel_path = None
+        if path is not None:
+            try:
+                rel_path = str(path.relative_to(REPO_ROOT)).replace("\\", "/")
+            except ValueError:
+                rel_path = str(path)
         out.append(
             {
                 "name": name,
@@ -372,6 +389,7 @@ def list_available_models() -> list[dict[str, Any]]:
                 "model_type": meta["model_type"],
                 "algorithm_family": meta["algorithm_family"],
                 "available": path is not None,
+                "artifact_path": rel_path,
                 "size_mb": round(path.stat().st_size / (1024 * 1024), 2) if path is not None else None,
             }
         )
@@ -385,10 +403,15 @@ def load_model(model_name: str) -> dict[str, Any]:
         raise ValueError(f"Invalid model name: {model_name}")
     path = _resolve_model_file(safe_name)
     if path is None:
-        raise FileNotFoundError(f"Model not found: {MODEL_DIR / f'{safe_name}.joblib'}")
+        raise FileNotFoundError(
+            f"Model '{safe_name}' not found in {SHARED_MODEL_DIR} or {MODEL_DIR}"
+        )
     artifact = joblib.load(path)
+    if not isinstance(artifact, dict):
+        artifact = {"model": artifact, "feature_columns": list(FEATURE_COLUMNS)}
     if "model_name" not in artifact:
         artifact["model_name"] = safe_name
+    artifact["artifact_path"] = str(path)
     reg_meta = MODEL_REGISTRY.get(safe_name, {})
     if "model_type" not in artifact:
         artifact["model_type"] = (
@@ -407,13 +430,8 @@ def score_candidates(model_name: str, features: pd.DataFrame) -> dict[str, Any]:
     columns = artifact["feature_columns"]
     if not isinstance(features, pd.DataFrame):
         raise TypeError("features must be a pandas DataFrame")
-    missing = set(columns) - set(features.columns)
-    extra = set(features.columns) - set(columns)
-    if missing or extra:
-        raise ValueError(
-            f"Feature mismatch. Missing: {sorted(missing)}; unexpected: {sorted(extra)}"
-        )
-    X = features[columns].to_numpy(dtype=np.float32)
+    aligned = align_feature_frame(features, columns)
+    X = aligned.to_numpy(dtype=np.float32)
     is_regression = (
         artifact.get("model_type") == "regression_scorer"
         or not hasattr(model, "predict_proba")
@@ -443,13 +461,8 @@ def predict(model_name: str, features: pd.DataFrame) -> np.ndarray:
     columns = artifact["feature_columns"]
     if not isinstance(features, pd.DataFrame):
         raise TypeError("features must be a pandas DataFrame")
-    missing = set(columns) - set(features.columns)
-    extra = set(features.columns) - set(columns)
-    if missing or extra:
-        raise ValueError(
-            f"Feature mismatch. Missing: {sorted(missing)}; unexpected: {sorted(extra)}"
-        )
-    return model.predict(features[columns].to_numpy(dtype=np.float32))
+    aligned = align_feature_frame(features, columns)
+    return model.predict(aligned.to_numpy(dtype=np.float32))
 
 
 def predict_proba(model_name: str, features: pd.DataFrame) -> np.ndarray:
@@ -459,13 +472,8 @@ def predict_proba(model_name: str, features: pd.DataFrame) -> np.ndarray:
     columns = artifact["feature_columns"]
     if not isinstance(features, pd.DataFrame):
         raise TypeError("features must be a pandas DataFrame")
-    missing = set(columns) - set(features.columns)
-    extra = set(features.columns) - set(columns)
-    if missing or extra:
-        raise ValueError(
-            f"Feature mismatch. Missing: {sorted(missing)}; unexpected: {sorted(extra)}"
-        )
-    X = features[columns].to_numpy(dtype=np.float32)
+    aligned = align_feature_frame(features, columns)
+    X = aligned.to_numpy(dtype=np.float32)
     if hasattr(model, "predict_proba"):
         return model.predict_proba(X)[:, 1]
     return model.predict(X).astype(np.float64)
