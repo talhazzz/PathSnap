@@ -1,0 +1,130 @@
+{
+  "generated_at_utc": "2026-11-18T08:49:07.728720+00:00",
+  "dataset_path": "C:\\Users\\mithu\\OneDrive\\Documents\\5th sem\\ML\\ML_HACKOTHON\\PathSnap_repo\\backend\\data\\processed\\candidate_features.csv",
+  "feature_columns": [
+    "distance_m",
+    "signed_lateral_offset_m",
+    "projection_fraction",
+    "distance_to_arc_start_m",
+    "distance_to_arc_end_m",
+    "arc_length_m",
+    "candidate_rank_distance",
+    "candidate_count_at_point",
+    "is_nearest_candidate",
+    "is_within_search_radius",
+    "gps_step_distance_m",
+    "gps_speed_mps",
+    "time_delta_s",
+    "gps_bearing_valid",
+    "heading_alignment_cos",
+    "heading_alignment_sin",
+    "is_self_loop"
+  ],
+  "models": {
+    "hist_gradient_boosting": {
+      "model_type": "classifier",
+      "algorithm_family": "Boosting",
+      "hyperparameters": {
+        "max_iter": 150,
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 30,
+        "l2_regularization": 1.0,
+        "random_state": 42,
+        "balance_classes": true
+      },
+      "validation_split_metrics": {
+        "rows": 331842,
+        "accuracy": 0.9209232104435243,
+        "precision_macro": 0.797002303582907,
+        "recall_macro": 0.9251625858851669,
+        "f1_macro": 0.8430252555670305,
+        "precision_pos": 0.6038262389886356,
+        "recall_pos": 0.9306869121343249,
+        "f1_pos": 0.7324449157294779,
+        "log_loss": 0.19014706278054994,
+        "roc_auc": 0.9767334762482645,
+        "average_precision": 0.8686050571429024,
+        "top1_accuracy": 0.8005078641204364,
+        "macro_trip_top1_accuracy": 0.8394207894951873,
+        "evaluated_points": 38593,
+        "confusion_matrix": [
+          [
+            269683,
+            23566
+          ],
+          [
+            2675,
+            35918
+          ]
+        ]
+      },
+      "split_train_time_s": 14.7111,
+      "full_80trip_train_time_s": 23.9531,
+      "model_size_mb": 0.24
+    },
+    "knn": {
+      "model_type": "classifier",
+      "algorithm_family": "Instance-based",
+      "hyperparameters": {
+        "n_neighbors": 15,
+        "weights": "distance",
+        "algorithm": "kd_tree",
+        "leaf_size": 40,
+        "n_jobs": -1,
+        "scaling": "StandardScaler",
+        "trip_stratified_reference_rows": 60000
+      },
+      "validation_split_metrics": {
+        "rows": 331842,
+        "accuracy": 0.9427197280633555,
+        "precision_macro": 0.8753433669412753,
+        "recall_macro": 0.8329875263932798,
+        "f1_macro": 0.8524160191845824,
+        "precision_pos": 0.7908116294954415,
+        "recall_pos": 0.6899955950560983,
+        "f1_pos": 0.7369717432817646,
+        "log_loss": 0.20377378392641152,
+        "roc_auc": 0.9504651837508696,
+        "average_precision": 0.8053657349808979,
+        "top1_accuracy": 0.7667711761200218,
+        "macro_trip_top1_accuracy": 0.8100860447908594,
+        "evaluated_points": 38593,
+        "confusion_matrix": [
+          [
+            286205,
+            7044
+          ],
+          [
+            11964,
+            26629
+          ]
+        ]
+      },
+      "split_train_time_s": 0.2363,
+      "full_80trip_train_time_s": 0.2266,
+      "model_size_mb": 5.44
+    },
+    "linear_regression": {
+      "model_type": "regression_scorer",
+      "algorithm_family": "Linear (OLS Candidate Ranking)",
+      "hyperparameters": {
+        "scaling": "StandardScaler",
+        "fit_intercept": true,
+        "hmm_softmax_temperature": 5.0
+      },
+      "validation_split_metrics": {
+        "rows": 331842,
+        "top1_accuracy": 0.602544502889125,
+        "macro_trip_top1_accuracy": 0.6570436288767372,
+        "evaluated_points": 38593,
+        "mse": 0.06201572263537042,
+        "r2": 0.3965803384780884,
+        "log_loss": null
+      },
+      "split_train_time_s": 0.622,
+      "full_80trip_train_time_s": 0.8666,
+      "model_size_mb": 0.0
+    }
+  }
+}
