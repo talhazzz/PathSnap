@@ -24,7 +24,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score
 from sklearn.model_selection import GroupKFold
 
-from backend.src.train_models import (
+from src.train_models import (
     BACKEND_DIR,
     DEFAULT_RF_PARAMS,
     MODEL_DIR,
@@ -35,7 +35,7 @@ from backend.src.train_models import (
     resolve_shared_dataset_path,
     run_group_kfold_cv,
 )
-from backend.src.trip_pipeline import FEATURE_COLUMNS
+from src.trip_pipeline import FEATURE_COLUMNS
 
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 

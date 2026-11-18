@@ -17,13 +17,13 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from backend.src.train_models import (
+from src.train_models import (
     MODEL_REGISTRY,
     RESULT_DIR,
     list_available_models,
     load_model,
 )
-from backend.src.trip_pipeline import DEFAULT_DATA_ROOT, run_trip_inference
+from src.trip_pipeline import DEFAULT_DATA_ROOT, run_trip_inference
 
 
 def evaluate_all_models(partition: str = "student_test") -> dict[str, Any]:

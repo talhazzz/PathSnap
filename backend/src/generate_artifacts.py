@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from backend.src.train_models import MODEL_DIR, RESULT_DIR, load_model
-from backend.src.trip_pipeline import (
+from src.train_models import MODEL_DIR, RESULT_DIR, load_model
+from src.trip_pipeline import (
     DEFAULT_DATA_ROOT,
     generate_folium_map,
     load_trip_arrays,

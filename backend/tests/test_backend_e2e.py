@@ -36,9 +36,9 @@ from backend.api.main import (
     predict_trip,
     root,
 )
-from backend.src.data_loader import load_partition
-from backend.src.train_models import list_available_models, load_model, score_candidates
-from backend.src.trip_pipeline import (
+from src.data_loader import load_partition
+from src.train_models import list_available_models, load_model, score_candidates
+from src.trip_pipeline import (
     DEFAULT_DATA_ROOT,
     FEATURE_COLUMNS,
     align_feature_frame,

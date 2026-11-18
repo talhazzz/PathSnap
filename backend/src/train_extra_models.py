@@ -26,7 +26,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-from backend.src.train_models import (
+from src.train_models import (
     MODEL_DIR,
     RESULT_DIR,
     compute_top1_accuracy,
@@ -34,7 +34,7 @@ from backend.src.train_models import (
     load_shared_dataset,
     resolve_shared_dataset_path,
 )
-from backend.src.trip_pipeline import FEATURE_COLUMNS
+from src.trip_pipeline import FEATURE_COLUMNS
 
 # Exact config from origin/ml-dev:artifacts/configs/hist_gradient_boosting.yaml
 HGB_PARAMS: dict[str, Any] = {
